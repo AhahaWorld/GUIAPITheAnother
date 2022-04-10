@@ -1,30 +1,26 @@
 package info.ahaha.guiapitheanother.util;
 
+import info.ahaha.guiapitheanother.GUI;
+import info.ahaha.guiapitheanother.GUIEvent;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
 import info.ahaha.guiapitheanother.guis.events.ButtonPushEvent;
 import org.bukkit.entity.Player;
 import org.geysermc.cumulus.Form;
 import org.geysermc.cumulus.SimpleForm;
 import org.geysermc.cumulus.response.SimpleFormResponse;
+import org.geysermc.cumulus.util.FormBuilder;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonFormBuilder {
-
     private List<ButtonGUI.Button> buttons;
-    private Player player;
     private String title;
 
-    public ButtonFormBuilder(List<ButtonGUI.Button> buttons, Player player, String title) {
+    public ButtonFormBuilder(List<ButtonGUI.Button> buttons, String title) {
         this.buttons = buttons;
-        this.player = player;
         this.title = title;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public List<ButtonGUI.Button> getButtons() {
@@ -43,45 +39,39 @@ public class ButtonFormBuilder {
         this.buttons = buttons;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public Result build() {
-        SimpleForm.Builder form = SimpleForm.builder();
-        form.title(getTitle());
+        SimpleForm.Builder builder = SimpleForm.builder();
+        builder.title(getTitle());
         final List<ButtonGUI.Button> buttons = new ArrayList<>(getButtons());
-
         for (ButtonGUI.Button button : buttons) {
-            form.button(button.getTitle());
+            builder.button(button.getTitle());
         }
-        form.responseHandler((f, s) -> {
-            SimpleFormResponse response = f.parseResponse(s);
-            if (response.isCorrect()) {
-                ButtonGUI.Button button = buttons.get(response.getClickedButtonId());
-                ButtonPushEvent buttonPushEvent = new ButtonPushEvent(this, getSessions().get(player), button);
-                this.call(buttonPushEvent);
-            }
-        });
 
+        return null; // TODO
     }
 
     public class Result {
 
         private Form form;
-        private ButtonPushEvent pushEvent;
+        private final SimpleForm.Builder builder;
 
-        public Result(Form form, ButtonPushEvent pushEvent) {
+        private void attachResponse(GUI gui){
+            builder.responseHandler((f, s) -> {
+                SimpleFormResponse response = f.parseResponse(s);
+                if (response.isCorrect()) {
+                    ButtonGUI.Button button = buttons.get(response.getClickedButtonId());
+                    gui.call(new ButtonPushEvent(gui, gui.getSessions().get(null /*TODO*/ ), button));
+                }
+            });
+        }
+
+        public Result(Form form, SimpleForm.Builder builder) {
             this.form = form;
-            this.pushEvent = pushEvent;
+            this.builder = builder;
         }
 
         public Form getForm() {
             return form;
-        }
-
-        public ButtonPushEvent getPushEvent() {
-            return pushEvent;
         }
     }
 }

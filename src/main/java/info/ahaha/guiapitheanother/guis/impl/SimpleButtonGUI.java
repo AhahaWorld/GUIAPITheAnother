@@ -3,6 +3,7 @@ package info.ahaha.guiapitheanother.guis.impl;
 import info.ahaha.guiapitheanother.GUIListener;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
 import info.ahaha.guiapitheanother.guis.events.ButtonPushEvent;
+import info.ahaha.guiapitheanother.util.ButtonFormBuilder;
 import org.bukkit.entity.Player;
 import org.geysermc.cumulus.Form;
 import org.geysermc.cumulus.SimpleForm;
@@ -40,7 +41,9 @@ public class SimpleButtonGUI implements ButtonGUI {
 
     @Override
     public Form getForm(Player player) {
+        Form form = new ButtonFormBuilder(getButtons(), getTitle()).build().getForm();
 
+        return null;
     }
 
     @Override

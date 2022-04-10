@@ -12,12 +12,9 @@ public class ButtonPushEvent extends GUIEvent {
     public ButtonPushEvent(GUI gui, Session session, ButtonGUI.Button button) {
         super(gui, session);
         this.button = button;
-        
     }
 
     public ButtonGUI.Button getButton() {
         return button;
     }
-
-
 }
