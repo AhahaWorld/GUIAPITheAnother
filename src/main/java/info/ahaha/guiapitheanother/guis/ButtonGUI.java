@@ -28,9 +28,11 @@ public interface ButtonGUI extends SupportedBedrock, GUI {
             this.iconUrl = iconUrl;
             ItemMeta meta = icon.getItemMeta();
             this.title = title;
-            if (meta == null) {
-
+            if (!meta.hasDisplayName()){
+                meta.setDisplayName(title);
+                this.icon.setItemMeta(meta);
             }
+
 
         }
 

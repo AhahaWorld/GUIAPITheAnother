@@ -1,4 +1,5 @@
 name: GUIAPITheAnother
 version: '${project.version}'
 main: info.ahaha.guiapitheanother.GUIAPITheAnother
-api-version: 1.18
+softdepend:
+  - Floodgate

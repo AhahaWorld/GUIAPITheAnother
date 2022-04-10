@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class GUIAPITheAnother extends JavaPlugin implements Listener {
+public final class GUIAPITheAnother extends JavaPlugin {
 
     public static GUIAPITheAnother plugin;
 
@@ -16,16 +16,6 @@ public final class GUIAPITheAnother extends JavaPlugin implements Listener {
         // Plugin startup logic
         plugin = this;
 
-        getServer().getPluginManager().registerEvents(this,this);
-    }
-
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e){
-        ItemBuilder builder = new ItemBuilder(Material.DIAMOND);
-        builder.name("つよつよだいや")
-                .lore("つよいよー","つよいんだよー")
-                        .glow(true);
-        e.getPlayer().getInventory().addItem(builder.build());
     }
 
     public boolean isFloodGateEnable(){
