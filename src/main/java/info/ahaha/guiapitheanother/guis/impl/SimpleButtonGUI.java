@@ -1,5 +1,6 @@
 package info.ahaha.guiapitheanother.guis.impl;
 
+import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIListener;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
 import info.ahaha.guiapitheanother.guis.events.ButtonPushEvent;
@@ -35,15 +36,9 @@ public class SimpleButtonGUI implements ButtonGUI {
 
     }
 
-    public void addButton(List<String> texts) {
-
-    }
-
     @Override
     public Form getForm(Player player) {
-        Form form = new ButtonFormBuilder(getButtons(), getTitle()).build().getForm();
-
-        return null;
+        return new ButtonFormBuilder(getButtons(), getTitle()).build(this, player).getForm();
     }
 
     @Override

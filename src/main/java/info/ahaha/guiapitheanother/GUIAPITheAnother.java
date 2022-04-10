@@ -1,5 +1,6 @@
 package info.ahaha.guiapitheanother;
 
+import info.ahaha.guiapitheanother.example.SayYoButtonPushListener;
 import info.ahaha.guiapitheanother.util.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -15,11 +16,9 @@ public final class GUIAPITheAnother extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         plugin = this;
-
     }
 
     public boolean isFloodGateEnable(){
-
         return getServer().getPluginManager().isPluginEnabled("Floodgate");
     }
 

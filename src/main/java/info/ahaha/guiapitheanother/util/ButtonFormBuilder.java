@@ -39,7 +39,7 @@ public class ButtonFormBuilder {
         this.buttons = buttons;
     }
 
-    public Result build() {
+    public Result build(GUI gui,Player player) {
         SimpleForm.Builder builder = SimpleForm.builder();
         builder.title(getTitle());
         final List<ButtonGUI.Button> buttons = new ArrayList<>(getButtons());
@@ -47,7 +47,7 @@ public class ButtonFormBuilder {
             builder.button(button.getTitle());
         }
 
-        return null; // TODO
+        return new Result(builder,player,gui);
     }
 
     public class Result {
@@ -55,19 +55,21 @@ public class ButtonFormBuilder {
         private Form form;
         private final SimpleForm.Builder builder;
 
-        private void attachResponse(GUI gui){
+        private void attachResponse(GUI gui, Player player) {
             builder.responseHandler((f, s) -> {
                 SimpleFormResponse response = f.parseResponse(s);
                 if (response.isCorrect()) {
                     ButtonGUI.Button button = buttons.get(response.getClickedButtonId());
-                    gui.call(new ButtonPushEvent(gui, gui.getSessions().get(null /*TODO*/ ), button));
+                    gui.call(new ButtonPushEvent(gui, gui.getSessions().get(player), button));
                 }
             });
         }
 
-        public Result(Form form, SimpleForm.Builder builder) {
-            this.form = form;
+        public Result(SimpleForm.Builder builder, Player player, GUI gui) {
             this.builder = builder;
+            attachResponse(gui, player);
+            this.form = builder.build();
+
         }
 
         public Form getForm() {

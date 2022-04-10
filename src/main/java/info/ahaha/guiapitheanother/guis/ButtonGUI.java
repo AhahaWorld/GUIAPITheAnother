@@ -32,8 +32,6 @@ public interface ButtonGUI extends SupportedBedrock, GUI {
                 meta.setDisplayName(title);
                 this.icon.setItemMeta(meta);
             }
-
-
         }
 
         public String getTitle() {
