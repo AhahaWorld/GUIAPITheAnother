@@ -1,4 +1,4 @@
-package info.ahaha.guiapitheanother.guis.sessons;
+package info.ahaha.guiapitheanother.guis.sesson;
 
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.Session;

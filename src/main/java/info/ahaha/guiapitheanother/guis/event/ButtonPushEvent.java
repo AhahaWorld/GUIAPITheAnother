@@ -1,4 +1,4 @@
-package info.ahaha.guiapitheanother.guis.events;
+package info.ahaha.guiapitheanother.guis.event;
 
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIEvent;
