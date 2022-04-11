@@ -1,26 +1,43 @@
 package info.ahaha.guiapitheanother.guis.impl;
 
-import info.ahaha.guiapitheanother.GUI;
+import info.ahaha.guiapitheanother.GUIEventManager;
 import info.ahaha.guiapitheanother.GUIListener;
+import info.ahaha.guiapitheanother.bedrock.SupportedBedrockGUI;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
-import info.ahaha.guiapitheanother.guis.events.ButtonPushEvent;
-import info.ahaha.guiapitheanother.util.ButtonFormBuilder;
 import org.bukkit.entity.Player;
-import org.geysermc.cumulus.Form;
-import org.geysermc.cumulus.SimpleForm;
-import org.geysermc.cumulus.response.SimpleFormResponse;
+import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleButtonGUI implements ButtonGUI {
-
-    private SessionContainer container;
+public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
+    private GUIEventManager manager = new GUIEventManager();
+    private SessionContainer container = new SessionContainer();
     private List<Button> buttons = new ArrayList<>();
+    private String title = "";
 
-
+    @Override
     public List<Button> getButtons() {
         return buttons;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public GUIEventManager getManager() {
+        return manager;
+    }
+
+    @Override
+    public SessionContainer getSessions() {
+        return container;
     }
 
     public void setButtons(List<Button> buttons) {
@@ -32,27 +49,12 @@ public class SimpleButtonGUI implements ButtonGUI {
     }
 
     @Override
-    public void bedRockVer() {
+    public void showForBE(Player player, FloodgatePlayer floodgatePlayer) {
 
     }
 
     @Override
-    public Form getForm(Player player) {
-        return new ButtonFormBuilder(getButtons(), getTitle()).build(this, player).getForm();
-    }
+    public void showForJE(Player player) {
 
-    @Override
-    public String getTitle() {
-        return null;
-    }
-
-    @Override
-    public SessionContainer getSessions() {
-        return this.container;
-    }
-
-    @Override
-    public List<GUIListener> getListeners() {
-        return null;
     }
 }

@@ -1,6 +1,7 @@
 package info.ahaha.guiapitheanother.impl;
 
 import info.ahaha.guiapitheanother.GUI;
+import info.ahaha.guiapitheanother.GUIEventManager;
 import info.ahaha.guiapitheanother.GUIListener;
 
 import java.util.List;
@@ -13,12 +14,12 @@ public class GUIImpl implements GUI {
     }
 
     @Override
-    public SessionContainer getSessions() {
+    public GUIEventManager getManager() {
         return null;
     }
 
     @Override
-    public List<GUIListener> getListeners() {
+    public SessionContainer getSessions() {
         return null;
     }
 }

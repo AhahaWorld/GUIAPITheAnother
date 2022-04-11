@@ -1,16 +1,12 @@
 package info.ahaha.guiapitheanother.util;
 
 import info.ahaha.guiapitheanother.GUI;
-import info.ahaha.guiapitheanother.GUIEvent;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
-import info.ahaha.guiapitheanother.guis.events.ButtonPushEvent;
-import org.bukkit.entity.Player;
+import info.ahaha.guiapitheanother.guis.event.ButtonPushEvent;
 import org.geysermc.cumulus.Form;
 import org.geysermc.cumulus.SimpleForm;
 import org.geysermc.cumulus.response.SimpleFormResponse;
-import org.geysermc.cumulus.util.FormBuilder;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 

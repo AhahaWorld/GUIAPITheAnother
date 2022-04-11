@@ -1,6 +1,7 @@
 package info.ahaha.guiapitheanother;
 
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +10,19 @@ public interface GUI {
 
     String getTitle();
 
-    default void show(Player player) {
+    GUIEventManager getManager();
+
+    SessionContainer getSessions();
+
+    Layout getLayout();
+
+    default void show(Player player){
 
     }
 
     default void call(GUIEvent event) {
-        // TODO listen event
+        getManager().call(event);
     }
-
-    SessionContainer getSessions();
-    List<GUIListener> getListeners();
 
     class SessionContainer {
         List<Session> sessions = new ArrayList<>();

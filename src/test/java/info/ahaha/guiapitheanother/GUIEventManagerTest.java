@@ -1,7 +1,7 @@
 package info.ahaha.guiapitheanother;
 
 import info.ahaha.guiapitheanother.example.SayYoButtonPushListener;
-import info.ahaha.guiapitheanother.guis.events.ButtonPushEvent;
+import info.ahaha.guiapitheanother.guis.event.ButtonPushEvent;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

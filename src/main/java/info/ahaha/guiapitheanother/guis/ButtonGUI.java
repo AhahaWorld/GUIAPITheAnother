@@ -1,22 +1,14 @@
 package info.ahaha.guiapitheanother.guis;
 
 import info.ahaha.guiapitheanother.GUI;
-import info.ahaha.guiapitheanother.bedrock.SupportedBedrock;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.geysermc.cumulus.Form;
-import org.geysermc.floodgate.api.FloodgateApi;
 
-public interface ButtonGUI extends SupportedBedrock, GUI {
+import java.util.List;
 
-    Form getForm(Player player);
-
-    default void show(Player player) {
-        if (FloodgateApi.getInstance().isFloodgatePlayer(player.getUniqueId())) {
-            FloodgateApi.getInstance().getPlayer(player.getUniqueId()).sendForm(getForm(player));
-        }
-    }
+public interface ButtonGUI extends GUI {
+    List<Button> getButtons();
 
     public static class Button {
         ItemStack icon;
@@ -27,8 +19,9 @@ public interface ButtonGUI extends SupportedBedrock, GUI {
             this.icon = icon;
             this.iconUrl = iconUrl;
             ItemMeta meta = icon.getItemMeta();
+
             this.title = title;
-            if (!meta.hasDisplayName()){
+            if (!meta.hasDisplayName()) {
                 meta.setDisplayName(title);
                 this.icon.setItemMeta(meta);
             }
