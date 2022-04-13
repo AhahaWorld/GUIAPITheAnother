@@ -3,6 +3,7 @@ package info.ahaha.guiapitheanother.util;
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
 import info.ahaha.guiapitheanother.guis.event.ButtonPushEvent;
+import org.bukkit.entity.Player;
 import org.geysermc.cumulus.Form;
 import org.geysermc.cumulus.SimpleForm;
 import org.geysermc.cumulus.response.SimpleFormResponse;
@@ -47,7 +48,6 @@ public class ButtonFormBuilder {
     }
 
     public class Result {
-
         private Form form;
         private final SimpleForm.Builder builder;
 

@@ -4,6 +4,6 @@ import org.bukkit.inventory.ItemStack;
 
 public interface Layout {
     Size size();
-    ItemStack[][] make();;
-    ItemStack[][] make(Session session);
+    boolean make(VirtualInventory inventory);
+    boolean make(VirtualInventory inventory, Session session);
 }

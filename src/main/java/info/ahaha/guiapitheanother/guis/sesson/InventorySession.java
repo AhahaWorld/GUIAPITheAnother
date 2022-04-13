@@ -15,13 +15,8 @@ public class InventorySession extends Session {
     }
 
     private final InventoryView inventoryView;
-    private final Map<String, Object> property = new HashMap<>();
 
     public InventoryView getInventoryView() {
         return inventoryView;
-    }
-
-    public Map<String, Object> getProperty() {
-        return property;
     }
 }

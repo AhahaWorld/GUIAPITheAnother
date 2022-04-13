@@ -2,6 +2,7 @@ package info.ahaha.guiapitheanother.guis.impl;
 
 import info.ahaha.guiapitheanother.GUIEventManager;
 import info.ahaha.guiapitheanother.GUIListener;
+import info.ahaha.guiapitheanother.Layout;
 import info.ahaha.guiapitheanother.bedrock.SupportedBedrockGUI;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
 import org.bukkit.entity.Player;
@@ -11,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
-    private GUIEventManager manager = new GUIEventManager();
-    private SessionContainer container = new SessionContainer();
+    private final GUIEventManager manager = new GUIEventManager();
+    private final SessionContainer container = new SessionContainer();
     private List<Button> buttons = new ArrayList<>();
     private String title = "";
 
@@ -38,6 +39,11 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
     @Override
     public SessionContainer getSessions() {
         return container;
+    }
+
+    @Override
+    public Layout getLayout() {
+        return null;
     }
 
     public void setButtons(List<Button> buttons) {
