@@ -8,9 +8,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class GUIAPITheAnother extends JavaPlugin {
 
     public static GUIAPITheAnother plugin;
+    public static List<GUI>guiList = new ArrayList<>();
 
     @Override
     public void onEnable() {

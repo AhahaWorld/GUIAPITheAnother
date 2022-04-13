@@ -5,8 +5,8 @@ public class GUIEvent {
         this.gui = gui;
         this.session = session;
     }
-    private final GUI gui;
-    private final Session session;
+    protected final GUI gui;
+    protected final Session session;
 
     public Session getSession() {
         return session;

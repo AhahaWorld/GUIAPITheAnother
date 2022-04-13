@@ -24,6 +24,10 @@ public interface GUI {
         getManager().call(event);
     }
 
+    default void init(){
+        GUIAPITheAnother.guiList.add(this);
+    }
+
     class SessionContainer {
         List<Session> sessions = new ArrayList<>();
 
