@@ -4,6 +4,7 @@ import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.Session;
 import info.ahaha.guiapitheanother.VirtualInventory;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.InventoryView;
 
 import java.util.HashMap;

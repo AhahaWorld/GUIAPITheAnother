@@ -82,7 +82,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
     public LayoutArea adapt(String name, Point point, Layout layout, boolean hidden) {
         Size layoutSize = layout.size();
         VirtualInventory cutInventory = cut(point, layoutSize);
-        LayoutArea area = new LayoutArea(name, layout, cutInventory, hidden);
+        LayoutArea area = new LayoutAreaImpl(name, layout, cutInventory, hidden);
         areas.add(area);
         if (!hidden)
             forceVisible(area);
@@ -93,7 +93,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
     public LayoutArea adapt(String name, Point point, Layout layout, Session session, boolean hidden) {
         Size layoutSize = layout.size();
         VirtualInventory cutInventory = cut(point, layoutSize);
-        LayoutArea area = new LayoutArea(name, layout, cutInventory, hidden);
+        LayoutArea area = new LayoutAreaImpl(name, layout, cutInventory, hidden);
         areas.add(area);
         if (!hidden)
             forceVisible(area);
@@ -113,16 +113,16 @@ public class VirtualInventoryImpl implements VirtualInventory {
 
     @Override
     public List<LayoutArea> collision(LayoutArea layoutArea) {
-        if (!(layoutArea.inventory instanceof CutVirtualInventory))
+        if (!(layoutArea.getInventory() instanceof CutVirtualInventory))
             return new ArrayList<>();
-        CutVirtualInventory o = (CutVirtualInventory) layoutArea.inventory;
+        CutVirtualInventory o = (CutVirtualInventory) layoutArea.getInventory();
         List<LayoutArea> list = new ArrayList<>();
         for (LayoutArea area : areas) {
-            if (area.hidden)
+            if (area.isHidden())
                 continue;
-            if (!(area.inventory instanceof CutVirtualInventory))
+            if (!(area.getInventory() instanceof CutVirtualInventory))
                 continue;
-            CutVirtualInventory i = (CutVirtualInventory) area.inventory;
+            CutVirtualInventory i = (CutVirtualInventory) area.getInventory();
             int in = 0;
             if (o.leftTop.x < i.rightBottom.x)
                 in++;
@@ -150,21 +150,21 @@ public class VirtualInventoryImpl implements VirtualInventory {
     @Override
     public List<LayoutArea> collision(String name) {
         for (LayoutArea area : areas)
-            if (area.name.equals(name))
+            if (area.getName().equals(name))
                 return collision(area);
         return null;
     }
 
     @Override
     public List<LayoutArea> overlap(LayoutArea layoutArea) {
-        if (!(layoutArea.inventory instanceof CutVirtualInventory))
+        if (!(layoutArea.getInventory() instanceof CutVirtualInventory))
             return new ArrayList<>();
-        CutVirtualInventory o = (CutVirtualInventory) layoutArea.inventory;
+        CutVirtualInventory o = (CutVirtualInventory) layoutArea.getInventory();
         List<LayoutArea> list = new ArrayList<>();
         for (LayoutArea area : areas) {
-            if (!(area.inventory instanceof CutVirtualInventory))
+            if (!(area.getInventory() instanceof CutVirtualInventory))
                 continue;
-            CutVirtualInventory i = (CutVirtualInventory) area.inventory;
+            CutVirtualInventory i = (CutVirtualInventory) area.getInventory();
             int in = 0;
             if (o.leftTop.x < i.rightBottom.x)
                 in++;
@@ -192,7 +192,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
     @Override
     public List<LayoutArea> overlap(String name) {
         for (LayoutArea area : areas)
-            if (area.name.equals(name))
+            if (area.getName().equals(name))
                 return overlap(area);
         return null;
     }
@@ -200,11 +200,11 @@ public class VirtualInventoryImpl implements VirtualInventory {
     @Override
     public LayoutArea dominion(Point point) {
         for (LayoutArea area : areas) {
-            if (area.hidden)
+            if (area.isHidden())
                 continue;
-            if (!(area.inventory instanceof CutVirtualInventory))
+            if (!(area.getInventory() instanceof CutVirtualInventory))
                 continue;
-            CutVirtualInventory i = (CutVirtualInventory) area.inventory;
+            CutVirtualInventory i = (CutVirtualInventory) area.getInventory();
             if (i.leftTop.x < point.x && point.x < i.rightBottom.x &&
                     i.leftTop.y < point.y && point.y < i.rightBottom.y)
                 return area;
@@ -214,11 +214,14 @@ public class VirtualInventoryImpl implements VirtualInventory {
 
     @Override
     public void hidden(LayoutArea layoutArea) {
-        for (LayoutArea area : areas)
+        for (LayoutArea area : areas) {
+            if (!(area instanceof LayoutAreaImpl))
+                continue;
             if (area == layoutArea) {
-                area.hidden = true;
-                area.inventory.setInventory(new ItemStack[area.inventory.getSize().x][area.inventory.getSize().y]);
+                ((LayoutAreaImpl) area).setHidden(true);
+                area.getInventory().setInventory(new ItemStack[area.getInventory().getSize().x][area.getInventory().getSize().y]);
             }
+        }
     }
 
     @Override
@@ -227,8 +230,10 @@ public class VirtualInventoryImpl implements VirtualInventory {
             if (area == layoutArea) {
                 if (collision(area).size() != 0)
                     throw new VirtualInventoryCollisionException(this);
-                area.hidden = false;
-                area.layout.make(area.inventory);
+                if (!(area instanceof LayoutAreaImpl))
+                    continue;
+                ((LayoutAreaImpl) area).setHidden(true);
+                area.getLayout().make(area.getInventory());
             }
     }
 
@@ -238,8 +243,10 @@ public class VirtualInventoryImpl implements VirtualInventory {
             if (area == layoutArea) {
                 for (LayoutArea col : collision(area))
                     hidden(col);
-                area.hidden = false;
-                area.layout.make(area.inventory);
+                if (!(area instanceof LayoutAreaImpl))
+                    continue;
+                ((LayoutAreaImpl) area).setHidden(false);
+                area.getLayout().make(area.getInventory());
             }
     }
 
@@ -320,7 +327,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
         public LayoutArea adapt(String name, Point point, Layout layout, boolean hidden) {
             Size layoutSize = layout.size();
             VirtualInventory cutInventory = cut(point, layoutSize);
-            LayoutArea area = new LayoutArea(name, layout, cutInventory, hidden);
+            LayoutArea area = new LayoutAreaImpl(name, layout, cutInventory, hidden);
             areas.add(area);
             if (!hidden)
                 forceVisible(area);
@@ -331,7 +338,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
         public LayoutArea adapt(String name, Point point, Layout layout, Session session, boolean hidden) {
             Size layoutSize = layout.size();
             VirtualInventory cutInventory = cut(point, layoutSize);
-            LayoutArea area = new LayoutArea(name, layout, cutInventory, hidden);
+            LayoutArea area = new LayoutAreaImpl(name, layout, cutInventory, hidden);
             areas.add(area);
             if (!hidden)
                 forceVisible(area);
@@ -350,16 +357,16 @@ public class VirtualInventoryImpl implements VirtualInventory {
 
         @Override
         public List<LayoutArea> collision(LayoutArea layoutArea) {
-            if (!(layoutArea.inventory instanceof CutVirtualInventory))
+            if (!(layoutArea.getInventory() instanceof CutVirtualInventory))
                 return new ArrayList<>();
-            CutVirtualInventory o = (CutVirtualInventory) layoutArea.inventory;
+            CutVirtualInventory o = (CutVirtualInventory) layoutArea.getInventory();
             List<LayoutArea> list = new ArrayList<>();
             for (LayoutArea area : areas) {
-                if (!area.hidden)
+                if (!area.isHidden())
                     continue;
-                if (!(area.inventory instanceof CutVirtualInventory))
+                if (!(area.getInventory() instanceof CutVirtualInventory))
                     continue;
-                CutVirtualInventory i = (CutVirtualInventory) area.inventory;
+                CutVirtualInventory i = (CutVirtualInventory) area.getInventory();
                 int in = 0;
                 if (o.leftTop.x < i.rightBottom.x)
                     in++;
@@ -387,21 +394,21 @@ public class VirtualInventoryImpl implements VirtualInventory {
         @Override
         public List<LayoutArea> collision(String name) {
             for (LayoutArea area : areas)
-                if (area.name.equals(name))
+                if (area.getName().equals(name))
                     return collision(area);
             return null;
         }
 
         @Override
         public List<LayoutArea> overlap(LayoutArea layoutArea) {
-            if (!(layoutArea.inventory instanceof CutVirtualInventory))
+            if (!(layoutArea.getInventory() instanceof CutVirtualInventory))
                 return new ArrayList<>();
-            CutVirtualInventory o = (CutVirtualInventory) layoutArea.inventory;
+            CutVirtualInventory o = (CutVirtualInventory) layoutArea.getInventory();
             List<LayoutArea> list = new ArrayList<>();
             for (LayoutArea area : areas) {
-                if (!(area.inventory instanceof CutVirtualInventory))
+                if (!(area.getInventory() instanceof CutVirtualInventory))
                     continue;
-                CutVirtualInventory i = (CutVirtualInventory) area.inventory;
+                CutVirtualInventory i = (CutVirtualInventory) area.getInventory();
                 int in = 0;
                 if (o.leftTop.x < i.rightBottom.x)
                     in++;
@@ -429,7 +436,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
         @Override
         public List<LayoutArea> overlap(String name) {
             for (LayoutArea area : areas)
-                if (area.name.equals(name))
+                if (area.getName().equals(name))
                     return overlap(area);
             return null;
         }
@@ -437,11 +444,11 @@ public class VirtualInventoryImpl implements VirtualInventory {
         @Override
         public LayoutArea dominion(Point point) {
             for (LayoutArea area : areas) {
-                if (area.hidden)
+                if (area.isHidden())
                     continue;
-                if (!(area.inventory instanceof CutVirtualInventory))
+                if (!(area.getInventory() instanceof CutVirtualInventory))
                     continue;
-                CutVirtualInventory i = (CutVirtualInventory) area.inventory;
+                CutVirtualInventory i = (CutVirtualInventory) area.getInventory();
                 if (i.leftTop.x < point.x && point.x < i.rightBottom.x &&
                         i.leftTop.y < point.y && point.y < i.rightBottom.y)
                     return area;
@@ -453,8 +460,10 @@ public class VirtualInventoryImpl implements VirtualInventory {
         public void hidden(LayoutArea layoutArea) {
             for (LayoutArea area : areas)
                 if (area == layoutArea) {
-                    area.hidden = true;
-                    area.inventory.setInventory(new ItemStack[area.inventory.getSize().x][area.inventory.getSize().y]);
+                    if (!(area instanceof LayoutAreaImpl))
+                        continue;
+                    ((LayoutAreaImpl) area).setHidden(true);
+                    area.getInventory().setInventory(new ItemStack[area.getInventory().getSize().x][area.getInventory().getSize().y]);
                 }
         }
 
@@ -464,8 +473,10 @@ public class VirtualInventoryImpl implements VirtualInventory {
                 if (area == layoutArea) {
                     if (collision(area).size() != 0)
                         throw new VirtualInventoryCollisionException(this);
-                    area.hidden = false;
-                    area.layout.make(area.inventory);
+                    if (!(area instanceof LayoutAreaImpl))
+                        continue;
+                    ((LayoutAreaImpl) area).setHidden(false);
+                    area.getLayout().make(area.getInventory());
                 }
         }
 
@@ -475,8 +486,10 @@ public class VirtualInventoryImpl implements VirtualInventory {
                 if (area == layoutArea) {
                     for (LayoutArea col : collision(area))
                         hidden(col);
-                    area.hidden = false;
-                    area.layout.make(area.inventory);
+                    if (!(area instanceof LayoutAreaImpl))
+                        continue;
+                    ((LayoutAreaImpl) area).setHidden(false);
+                    area.getLayout().make(area.getInventory());
                 }
         }
     }

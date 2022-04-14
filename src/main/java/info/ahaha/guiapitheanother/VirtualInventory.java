@@ -43,17 +43,47 @@ public interface VirtualInventory {
 
     void forceVisible(LayoutArea layoutArea);
 
-    class LayoutArea{
-        public LayoutArea(String name, Layout layout, VirtualInventory inventory, boolean hidden) {
+    class LayoutAreaImpl implements LayoutArea{
+        public LayoutAreaImpl(String name, Layout layout, VirtualInventory inventory, boolean hidden) {
             this.name = name;
             this.layout = layout;
             this.inventory = inventory;
             this.hidden = hidden;
         }
 
-        public String name;
-        public Layout layout;
-        public VirtualInventory inventory;
-        public boolean hidden;
+        private final String name;
+        private boolean hidden;
+        private final Layout layout;
+        private final VirtualInventory inventory;
+        private final GUIEventManager areaEventManager = new GUIEventManager();
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public boolean isHidden() {
+            return hidden;
+        }
+
+        @Override
+        public Layout getLayout() {
+            return layout;
+        }
+
+        @Override
+        public VirtualInventory getInventory() {
+            return inventory;
+        }
+
+        @Override
+        public GUIEventManager getAreaEventManager() {
+            return areaEventManager;
+        }
+
+        public void setHidden(boolean hidden) {
+            this.hidden = hidden;
+        }
     }
 }
