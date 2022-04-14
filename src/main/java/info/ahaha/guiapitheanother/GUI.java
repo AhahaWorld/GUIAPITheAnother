@@ -7,18 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface GUI {
-
     String getTitle();
 
     GUIEventManager getManager();
 
     SessionContainer getSessions();
 
-    Layout getLayout();
-
-    default void show(Player player){
-
-    }
+    void show(Player player);
 
     default void call(GUIEvent event) {
         getManager().call(event);

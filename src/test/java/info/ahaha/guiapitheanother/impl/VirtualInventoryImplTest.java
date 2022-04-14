@@ -34,8 +34,8 @@ class VirtualInventoryImplTest {
     void collision(){
         VirtualInventoryImpl inventory = new VirtualInventoryImpl(new Size(10, 10));
         inventory.adapt("a1", new Point(0, 0), new LayoutImpl(new Size(3, 3)));
-        inventory.adapt("a1", new Point(4, 4), new LayoutImpl(new Size(3, 3)));
-        LayoutArea area2 = inventory.adapt("a2", new Point(1, 1), new LayoutImpl(new Size(3, 3)));
-        inventory.collision(area2);
+        inventory.adapt("a2", new Point(4, 4), new LayoutImpl(new Size(3, 3)));
+        LayoutArea area3 = inventory.adapt("a3", new Point(1, 1), new LayoutImpl(new Size(3, 3)));
+        inventory.collision(area3);
     }
 }

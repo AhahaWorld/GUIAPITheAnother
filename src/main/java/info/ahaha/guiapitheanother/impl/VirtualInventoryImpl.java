@@ -19,6 +19,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
     private ItemStack[][] inventory;
     private final Size size;
     private final List<LayoutArea> areas = new ArrayList<>();
+    private Session session;
 
     @Override
     public List<LayoutArea> getAreas() {
@@ -233,7 +234,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
                 if (!(area instanceof LayoutAreaImpl))
                     continue;
                 ((LayoutAreaImpl) area).setHidden(true);
-                area.getLayout().make(area.getInventory());
+                area.getLayout().make(area.getInventory(), session);
             }
     }
 
@@ -246,7 +247,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
                 if (!(area instanceof LayoutAreaImpl))
                     continue;
                 ((LayoutAreaImpl) area).setHidden(false);
-                area.getLayout().make(area.getInventory());
+                area.getLayout().make(area.getInventory(), session);
             }
     }
 
@@ -476,7 +477,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
                     if (!(area instanceof LayoutAreaImpl))
                         continue;
                     ((LayoutAreaImpl) area).setHidden(false);
-                    area.getLayout().make(area.getInventory());
+                    area.getLayout().make(area.getInventory(), session);
                 }
         }
 
@@ -489,7 +490,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
                     if (!(area instanceof LayoutAreaImpl))
                         continue;
                     ((LayoutAreaImpl) area).setHidden(false);
-                    area.getLayout().make(area.getInventory());
+                    area.getLayout().make(area.getInventory(), session);
                 }
         }
     }

@@ -6,7 +6,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-public interface ButtonGUI extends GUI {
+public interface ButtonGUI extends GUI, LayoutGUI {
     List<Button> getButtons();
 
     class Button {
