@@ -2,8 +2,7 @@ package info.ahaha.guiapitheanother.guis.event;
 
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIEvent;
-import info.ahaha.guiapitheanother.Session;
-import info.ahaha.guiapitheanother.guis.sesson.InventorySession;
+import info.ahaha.guiapitheanother.guis.session.InventorySession;
 
 public class InventoryEvent extends GUIEvent {
 

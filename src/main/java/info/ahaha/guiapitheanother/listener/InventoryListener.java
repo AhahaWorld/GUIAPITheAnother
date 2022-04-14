@@ -3,7 +3,7 @@ package info.ahaha.guiapitheanother.listener;
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIAPITheAnother;
 import info.ahaha.guiapitheanother.Session;
-import info.ahaha.guiapitheanother.guis.sesson.InventorySession;
+import info.ahaha.guiapitheanother.guis.session.InventorySession;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

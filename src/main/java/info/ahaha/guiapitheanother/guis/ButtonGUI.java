@@ -1,7 +1,6 @@
 package info.ahaha.guiapitheanother.guis;
 
 import info.ahaha.guiapitheanother.GUI;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -10,7 +9,7 @@ import java.util.List;
 public interface ButtonGUI extends GUI {
     List<Button> getButtons();
 
-    public static class Button {
+    class Button {
         ItemStack icon;
         String iconUrl;
         String title;

@@ -1,14 +1,10 @@
-package info.ahaha.guiapitheanother.guis.sesson;
+package info.ahaha.guiapitheanother.guis.session;
 
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.Session;
 import info.ahaha.guiapitheanother.VirtualInventory;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.InventoryView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class InventorySession extends Session {
     public InventorySession(GUI gui, Player player, InventoryView inventoryView,VirtualInventory virtualInventory) {
