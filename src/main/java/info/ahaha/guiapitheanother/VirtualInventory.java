@@ -42,48 +42,4 @@ public interface VirtualInventory {
     void visible(LayoutArea layoutArea) throws VirtualInventoryCollisionException;
 
     void forceVisible(LayoutArea layoutArea);
-
-    class LayoutAreaImpl implements LayoutArea{
-        public LayoutAreaImpl(String name, Layout layout, VirtualInventory inventory, boolean hidden) {
-            this.name = name;
-            this.layout = layout;
-            this.inventory = inventory;
-            this.hidden = hidden;
-        }
-
-        private final String name;
-        private boolean hidden;
-        private final Layout layout;
-        private final VirtualInventory inventory;
-        private final GUIEventManager areaEventManager = new GUIEventManager();
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public boolean isHidden() {
-            return hidden;
-        }
-
-        @Override
-        public Layout getLayout() {
-            return layout;
-        }
-
-        @Override
-        public VirtualInventory getInventory() {
-            return inventory;
-        }
-
-        @Override
-        public GUIEventManager getAreaEventManager() {
-            return areaEventManager;
-        }
-
-        public void setHidden(boolean hidden) {
-            this.hidden = hidden;
-        }
-    }
 }

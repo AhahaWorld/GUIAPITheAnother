@@ -27,4 +27,12 @@ public class Point implements Cloneable{
             throw new AssertionError();
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Size)
+            if(((Size) obj).x == x && ((Size) obj).y == y)
+                return true;
+        return super.equals(obj);
+    }
 }

@@ -1,5 +1,6 @@
 package info.ahaha.guiapitheanother.impl;
 
+import org.bukkit.entity.Player;
 import org.junit.jupiter.api.Test;
 import info.ahaha.guiapitheanother.*;
 
@@ -20,12 +21,12 @@ class VirtualInventoryImplTest {
         }
 
         @Override
-        public boolean make(VirtualInventory inventory) {
+        public boolean make(VirtualInventory inventory, Session session) {
             return false;
         }
 
         @Override
-        public boolean make(VirtualInventory inventory, Session session) {
+        public boolean make(VirtualInventory inventory, Player player) {
             return false;
         }
     }

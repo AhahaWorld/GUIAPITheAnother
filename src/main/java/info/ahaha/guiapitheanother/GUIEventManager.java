@@ -1,12 +1,14 @@
 package info.ahaha.guiapitheanother;
 
 import info.ahaha.guiapitheanother.annotation.GUIEventHandler;
+import info.ahaha.guiapitheanother.guis.event.attribute.TargetButtonUsable;
+import info.ahaha.guiapitheanother.guis.event.attribute.TargetPointUsable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
-public class GUIEventManager {
+public class GUIEventManager implements GUIEventCallable {
     private final Map<GUIListener, List<ListenMethod>> guiListenerMethodMap = new HashMap<>();
 
     public static List<ListenMethod> enumerateListenMethod(GUIListener listener) {
@@ -40,6 +42,12 @@ public class GUIEventManager {
         for (GUIListener listener : guiListenerMethodMap.keySet())
             for (ListenMethod m : guiListenerMethodMap.get(listener))
                 if (m.argEventClass.equals(e.getClass())) {
+                    if(e instanceof TargetPointUsable)
+                        if(!((TargetPointUsable) e).check(m))
+                            return;
+                    if(e instanceof TargetButtonUsable)
+                        if(!((TargetButtonUsable) e).check(m))
+                            return;
                     try {
                         m.method.invoke(listener, e);
                     } catch (IllegalAccessException | InvocationTargetException ex) {

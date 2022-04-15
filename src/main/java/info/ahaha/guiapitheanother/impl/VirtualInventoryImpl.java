@@ -2,6 +2,7 @@ package info.ahaha.guiapitheanother.impl;
 
 import info.ahaha.guiapitheanother.*;
 import info.ahaha.guiapitheanother.exception.VirtualInventoryCollisionException;
+import info.ahaha.guiapitheanother.guis.event.convert.ConvertableClickPoint;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -20,6 +21,10 @@ public class VirtualInventoryImpl implements VirtualInventory {
     private final Size size;
     private final List<LayoutArea> areas = new ArrayList<>();
     private Session session;
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 
     @Override
     public List<LayoutArea> getAreas() {
@@ -82,7 +87,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
     @Override
     public LayoutArea adapt(String name, Point point, Layout layout, boolean hidden) {
         Size layoutSize = layout.size();
-        VirtualInventory cutInventory = cut(point, layoutSize);
+        CutVirtualInventory cutInventory = (CutVirtualInventory) cut(point, layoutSize);
         LayoutArea area = new LayoutAreaImpl(name, layout, cutInventory, hidden);
         areas.add(area);
         if (!hidden)
@@ -93,7 +98,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
     @Override
     public LayoutArea adapt(String name, Point point, Layout layout, Session session, boolean hidden) {
         Size layoutSize = layout.size();
-        VirtualInventory cutInventory = cut(point, layoutSize);
+        CutVirtualInventory cutInventory = (CutVirtualInventory) cut(point, layoutSize);
         LayoutArea area = new LayoutAreaImpl(name, layout, cutInventory, hidden);
         areas.add(area);
         if (!hidden)
@@ -253,8 +258,8 @@ public class VirtualInventoryImpl implements VirtualInventory {
 
     public class CutVirtualInventory implements VirtualInventory {
         public CutVirtualInventory(Point p1, Point p2) {
-            leftTop = new Point(Math.min(p1.x, p2.x) , Math.min(p1.y, p2.y));
-            rightBottom = new Point(Math.max(p1.x, p2.x) , Math.max(p1.y, p2.y));
+            leftTop = new Point(Math.min(p1.x, p2.x), Math.min(p1.y, p2.y));
+            rightBottom = new Point(Math.max(p1.x, p2.x), Math.max(p1.y, p2.y));
             size = new Size(rightBottom.x - leftTop.x, rightBottom.y - leftTop.y);
         }
 
@@ -327,7 +332,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
         @Override
         public LayoutArea adapt(String name, Point point, Layout layout, boolean hidden) {
             Size layoutSize = layout.size();
-            VirtualInventory cutInventory = cut(point, layoutSize);
+            CutVirtualInventory cutInventory = (CutVirtualInventory) cut(point, layoutSize);
             LayoutArea area = new LayoutAreaImpl(name, layout, cutInventory, hidden);
             areas.add(area);
             if (!hidden)
@@ -338,7 +343,7 @@ public class VirtualInventoryImpl implements VirtualInventory {
         @Override
         public LayoutArea adapt(String name, Point point, Layout layout, Session session, boolean hidden) {
             Size layoutSize = layout.size();
-            VirtualInventory cutInventory = cut(point, layoutSize);
+            CutVirtualInventory cutInventory = (CutVirtualInventory) cut(point, layoutSize);
             LayoutArea area = new LayoutAreaImpl(name, layout, cutInventory, hidden);
             areas.add(area);
             if (!hidden)
@@ -492,6 +497,62 @@ public class VirtualInventoryImpl implements VirtualInventory {
                     ((LayoutAreaImpl) area).setHidden(false);
                     area.getLayout().make(area.getInventory(), session);
                 }
+        }
+    }
+
+    class LayoutAreaImpl implements LayoutArea {
+        public LayoutAreaImpl(String name, Layout layout, CutVirtualInventory inventory, boolean hidden) {
+            this.name = name;
+            this.layout = layout;
+            this.inventory = inventory;
+            this.hidden = hidden;
+        }
+
+        private final String name;
+        private boolean hidden;
+        private final Layout layout;
+        private final CutVirtualInventory inventory;
+        private final GUIEventManager areaEventManager = new GUIEventManager();
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public boolean isHidden() {
+            return hidden;
+        }
+
+        @Override
+        public Layout getLayout() {
+            return layout;
+        }
+
+        @Override
+        public VirtualInventory getInventory() {
+            return inventory;
+        }
+
+        @Override
+        public GUIEventManager getAreaEventManager() {
+            return areaEventManager;
+        }
+
+        @Override
+        public GUIEvent convert(GUIEvent guiEvent){
+            if(guiEvent instanceof ConvertableClickPoint)
+                guiEvent = (GUIEvent) ((ConvertableClickPoint) guiEvent).convertClickPoint(inventory.leftTop);
+            return guiEvent;
+        }
+
+        @Override
+        public void call(GUIEvent event){
+            areaEventManager.call(convert(event));
+        }
+
+        public void setHidden(boolean hidden) {
+            this.hidden = hidden;
         }
     }
 }

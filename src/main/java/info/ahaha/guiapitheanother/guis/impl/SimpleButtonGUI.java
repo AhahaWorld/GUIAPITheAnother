@@ -48,7 +48,7 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
 
     @Override
     public void show(Player player) {
-        ButtonGUI.super.show(player);
+        ButtonGUI.super.showInventory(player);
     }
 
     public void setButtons(List<Button> buttons) {
@@ -66,6 +66,6 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
 
     @Override
     public void showForJE(Player player) {
-        ButtonGUI.super.show(player);
+        ButtonGUI.super.showInventory(player);
     }
 }

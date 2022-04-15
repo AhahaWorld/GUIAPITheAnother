@@ -5,7 +5,6 @@ import info.ahaha.guiapitheanother.GUIEvent;
 import info.ahaha.guiapitheanother.guis.session.InventorySession;
 
 public class InventoryEvent extends GUIEvent {
-
     protected InventorySession inventorySession;
 
     public InventoryEvent(GUI gui, InventorySession session) {

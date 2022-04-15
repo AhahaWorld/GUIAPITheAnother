@@ -1,6 +1,6 @@
 package info.ahaha.guiapitheanother;
 
-public interface LayoutArea {
+public interface LayoutArea extends GUIEventCallable {
     String getName();
 
     boolean isHidden();
@@ -10,4 +10,8 @@ public interface LayoutArea {
     VirtualInventory getInventory();
 
     GUIEventManager getAreaEventManager();
+
+    GUIEvent convert(GUIEvent guiEvent);
+
+    void call(GUIEvent event);
 }
