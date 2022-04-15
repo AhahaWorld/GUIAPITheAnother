@@ -1,7 +1,6 @@
 package info.ahaha.guiapitheanother.guis.impl;
 
 import info.ahaha.guiapitheanother.GUIEventManager;
-import info.ahaha.guiapitheanother.GUIListener;
 import info.ahaha.guiapitheanother.Layout;
 import info.ahaha.guiapitheanother.bedrock.SupportedBedrockGUI;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;

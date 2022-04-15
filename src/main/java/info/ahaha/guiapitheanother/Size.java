@@ -1,13 +1,13 @@
 package info.ahaha.guiapitheanother;
 
-public class Size implements Cloneable{
+public class Size implements Cloneable {
     public int x, y;
 
-    public int capacity(){
+    public int capacity() {
         return x * y;
     }
 
-    public boolean fit(Point point){
+    public boolean fit(Point point) {
         return point.x < x && point.y < y;
     }
 
@@ -31,7 +31,7 @@ public class Size implements Cloneable{
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Size)
-            if(((Size) obj).x == x && ((Size) obj).y == y)
+            if (((Size) obj).x == x && ((Size) obj).y == y)
                 return true;
         return super.equals(obj);
     }

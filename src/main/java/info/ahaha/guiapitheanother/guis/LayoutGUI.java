@@ -49,6 +49,7 @@ public interface LayoutGUI extends GUI {
             inventory = Bukkit.createInventory(holder, InventoryUtils.fitInventoryType(getLayout().size()));
         else
             inventory = Bukkit.createInventory(holder, InventoryUtils.fitInventorySize(getLayout().size()));
+        inventory.setContents(InventoryUtils.convertVInventoryToInventory(inventory.getType(), inventory.getContents().length, vInventory));
         holder.setInventory(inventory);
         InventoryView view = player.openInventory(inventory);
         InventorySession session = new InventorySession(this, player, view, vInventory);
