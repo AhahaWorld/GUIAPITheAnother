@@ -3,7 +3,7 @@ package info.ahaha.guiapitheanother.guis.event;
 import info.ahaha.guiapitheanother.*;
 import info.ahaha.guiapitheanother.guis.event.attribute.SubcontractSelector;
 import info.ahaha.guiapitheanother.guis.event.attribute.TargetPointUsable;
-import info.ahaha.guiapitheanother.guis.event.convert.ConvertableClickPoint;
+import info.ahaha.guiapitheanother.guis.event.convert.ClickPointConvertable;
 import info.ahaha.guiapitheanother.guis.session.InventorySession;
 import info.ahaha.guiapitheanother.impl.VirtualInventoryImpl;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GUIClickEvent extends InventoryEvent implements ConvertableClickPoint, TargetPointUsable, SubcontractSelector {
+public class GUIClickEvent extends InventoryEvent implements ClickPointConvertable, TargetPointUsable, SubcontractSelector {
     public GUIClickEvent(GUI gui, InventorySession session, Point clickPos) {
         super(gui, session);
         this.clickPos = clickPos;
@@ -20,7 +20,7 @@ public class GUIClickEvent extends InventoryEvent implements ConvertableClickPoi
     protected final Point clickPos;
 
     @Override
-    public ConvertableClickPoint convertClickPoint(Point new_origin) {
+    public ClickPointConvertable convertClickPoint(Point new_origin) {
         return new GUIClickEvent(gui, inventorySession, clickPos.sub(new_origin));
     }
 

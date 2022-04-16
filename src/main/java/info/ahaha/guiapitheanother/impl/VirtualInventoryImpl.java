@@ -2,7 +2,8 @@ package info.ahaha.guiapitheanother.impl;
 
 import info.ahaha.guiapitheanother.*;
 import info.ahaha.guiapitheanother.exception.VirtualInventoryCollisionException;
-import info.ahaha.guiapitheanother.guis.event.convert.ConvertableClickPoint;
+import info.ahaha.guiapitheanother.guis.event.convert.ClickPointConvertable;
+import info.ahaha.guiapitheanother.guis.event.convert.NestTimingConvertable;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -541,8 +542,10 @@ public class VirtualInventoryImpl implements VirtualInventory {
 
         @Override
         public GUIEvent convert(GUIEvent guiEvent){
-            if(guiEvent instanceof ConvertableClickPoint)
-                guiEvent = (GUIEvent) ((ConvertableClickPoint) guiEvent).convertClickPoint(inventory.leftTop);
+            if(guiEvent instanceof ClickPointConvertable)
+                guiEvent = (GUIEvent) ((ClickPointConvertable) guiEvent).convertClickPoint(inventory.leftTop);
+            if(guiEvent instanceof NestTimingConvertable)
+                guiEvent = (GUIEvent) ((NestTimingConvertable) guiEvent).convertNestTiming();
             return guiEvent;
         }
 
