@@ -7,6 +7,7 @@ import info.ahaha.guiapitheanother.guis.event.attribute.TargetPointUsable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.*;
 
 public class GUIEventManager implements GUIEventCallable {
@@ -20,7 +21,15 @@ public class GUIEventManager implements GUIEventCallable {
                 continue;
             if (method.getParameterCount() != 1)
                 continue;
-            if (!method.getParameterTypes()[0].getGenericSuperclass().equals(GUIEvent.class))
+            Type type = method.getParameterTypes()[0].getGenericSuperclass();
+            while (!type.equals(GUIEvent.class)){
+                if (!(type instanceof Class))
+                    break;
+                type = ((Class<?>) type).getGenericSuperclass();
+                if(type.equals(Object.class))
+                    break;
+            }
+            if (!type.equals(GUIEvent.class))
                 continue;
             list.add(new ListenMethod(method, method.getParameterTypes()[0]));
         }
