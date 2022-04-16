@@ -40,20 +40,21 @@ public class GUIEventManager implements GUIEventCallable {
 
     public void call(GUIEvent e) {
         for (GUIListener listener : guiListenerMethodMap.keySet())
-            for (ListenMethod m : guiListenerMethodMap.get(listener))
-                if (m.argEventClass.equals(e.getClass())) {
-                    if(e instanceof TargetPointUsable)
-                        if(!((TargetPointUsable) e).check(m))
-                            return;
-                    if(e instanceof TargetButtonUsable)
-                        if(!((TargetButtonUsable) e).check(m))
-                            return;
-                    try {
-                        m.method.invoke(listener, e);
-                    } catch (IllegalAccessException | InvocationTargetException ex) {
-                        ex.printStackTrace();
-                    }
+            for (ListenMethod m : guiListenerMethodMap.get(listener)) {
+                if (!m.argEventClass.equals(e.getClass()))
+                    continue;
+                if (e instanceof TargetPointUsable)
+                    if (!((TargetPointUsable) e).check(m))
+                        continue;
+                if (e instanceof TargetButtonUsable)
+                    if (!((TargetButtonUsable) e).check(m))
+                        continue;
+                try {
+                    m.method.invoke(listener, e);
+                } catch (IllegalAccessException | InvocationTargetException ex) {
+                    ex.printStackTrace();
                 }
+            }
     }
 
     public Map<GUIListener, List<ListenMethod>> getListenersMap() {
