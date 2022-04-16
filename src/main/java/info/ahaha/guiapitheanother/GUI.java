@@ -13,7 +13,7 @@ public interface GUI {
 
     SessionContainer getSessions();
 
-    void show(Player player);
+    Session show(Player player);
 
     default void call(GUIEvent event) {
         getManager().call(event);

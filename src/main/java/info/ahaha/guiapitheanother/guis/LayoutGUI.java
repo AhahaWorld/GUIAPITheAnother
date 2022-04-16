@@ -40,7 +40,7 @@ public interface LayoutGUI extends GUI {
         }
     }
 
-    default void showInventory(Player player) {
+    default Session showInventory(Player player) {
         VirtualInventoryImpl vInventory = new VirtualInventoryImpl(getLayout().size());
         getLayout().make(vInventory, player);
         SessionEmbeddedInventoryHolder holder = new SessionEmbeddedInventoryHolder();
@@ -55,5 +55,6 @@ public interface LayoutGUI extends GUI {
         InventorySession session = new InventorySession(this, player, view, vInventory);
         holder.setSession(session);
         vInventory.setSession(session);
+        return session;
     }
 }

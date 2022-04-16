@@ -1,17 +1,22 @@
 package info.ahaha.guiapitheanother.guis.event;
 
-import info.ahaha.guiapitheanother.*;
+import info.ahaha.guiapitheanother.GUI;
+import info.ahaha.guiapitheanother.GUIEventCallable;
+import info.ahaha.guiapitheanother.Point;
+import info.ahaha.guiapitheanother.VirtualInventory;
 import info.ahaha.guiapitheanother.guis.event.attribute.SubcontractSelector;
+import info.ahaha.guiapitheanother.guis.event.attribute.TargetItemNameUsable;
 import info.ahaha.guiapitheanother.guis.event.attribute.TargetPointUsable;
 import info.ahaha.guiapitheanother.guis.event.convert.ClickPointConvertable;
 import info.ahaha.guiapitheanother.guis.session.InventorySession;
 import info.ahaha.guiapitheanother.impl.VirtualInventoryImpl;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GUIClickEvent extends InventoryEvent implements ClickPointConvertable, TargetPointUsable, SubcontractSelector {
+public class GUIClickEvent extends InventoryEvent implements ClickPointConvertable, TargetPointUsable, SubcontractSelector, TargetItemNameUsable {
     public GUIClickEvent(GUI gui, InventorySession session, Point clickPos) {
         super(gui, session);
         this.clickPos = clickPos;
@@ -27,6 +32,11 @@ public class GUIClickEvent extends InventoryEvent implements ClickPointConvertab
     @Override
     public Point getTargetPoint() {
         return clickPos;
+    }
+
+    @Override
+    public ItemStack getTargetItem() {
+        return inventorySession.getVirtualInventory().get(clickPos);
     }
 
     @Override

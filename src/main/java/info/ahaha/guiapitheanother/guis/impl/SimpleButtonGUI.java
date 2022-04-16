@@ -2,6 +2,7 @@ package info.ahaha.guiapitheanother.guis.impl;
 
 import info.ahaha.guiapitheanother.GUIEventManager;
 import info.ahaha.guiapitheanother.Layout;
+import info.ahaha.guiapitheanother.Session;
 import info.ahaha.guiapitheanother.bedrock.SupportedBedrockGUI;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
 import org.bukkit.entity.Player;
@@ -46,8 +47,8 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
     }
 
     @Override
-    public void show(Player player) {
-        ButtonGUI.super.showInventory(player);
+    public Session show(Player player) {
+        return ButtonGUI.super.showInventory(player);
     }
 
     public void setButtons(List<Button> buttons) {
@@ -59,12 +60,12 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
     }
 
     @Override
-    public void showForBE(Player player, FloodgatePlayer floodgatePlayer) {
-
+    public Session showForBE(Player player, FloodgatePlayer floodgatePlayer) {
+        return null; // TODO
     }
 
     @Override
-    public void showForJE(Player player) {
-        ButtonGUI.super.showInventory(player);
+    public Session showForJE(Player player) {
+        return ButtonGUI.super.showInventory(player);
     }
 }

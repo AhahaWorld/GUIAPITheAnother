@@ -2,6 +2,7 @@ package info.ahaha.guiapitheanother;
 
 import info.ahaha.guiapitheanother.annotation.GUIEventHandler;
 import info.ahaha.guiapitheanother.guis.event.attribute.TargetButtonUsable;
+import info.ahaha.guiapitheanother.guis.event.attribute.TargetItemNameUsable;
 import info.ahaha.guiapitheanother.guis.event.attribute.TargetPointUsable;
 
 import java.lang.reflect.InvocationTargetException;
@@ -44,10 +45,13 @@ public class GUIEventManager implements GUIEventCallable {
                 if (!m.argEventClass.equals(e.getClass()))
                     continue;
                 if (e instanceof TargetPointUsable)
-                    if (!((TargetPointUsable) e).check(m))
+                    if (!((TargetPointUsable) e).checkPoint(m))
                         continue;
                 if (e instanceof TargetButtonUsable)
-                    if (!((TargetButtonUsable) e).check(m))
+                    if (!((TargetButtonUsable) e).checkButton(m))
+                        continue;
+                if (e instanceof TargetItemNameUsable)
+                    if (!((TargetItemNameUsable) e).checkItemName(m))
                         continue;
                 try {
                     m.method.invoke(listener, e);

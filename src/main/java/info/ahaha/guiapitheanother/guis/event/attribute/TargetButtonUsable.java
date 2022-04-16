@@ -7,7 +7,7 @@ import info.ahaha.guiapitheanother.guis.ButtonGUI;
 public interface TargetButtonUsable {
     ButtonGUI.Button getTargetButton();
 
-    default boolean check(GUIEventManager.ListenMethod method) {
+    default boolean checkButton(GUIEventManager.ListenMethod method) {
         TargetButton button = method.method.getAnnotation(TargetButton.class);
         if (button == null)
             return true;

@@ -8,8 +8,11 @@ import java.util.List;
 public interface Layout {
     Size size();
 
-    boolean make(VirtualInventory inventory, Session session);
     boolean make(VirtualInventory inventory, Player player);
+
+    default boolean make(VirtualInventory inventory, Session session){
+        return make(inventory, session.getPlayer());
+    }
 
     default List<GUIListener> listeners(){
         return null;

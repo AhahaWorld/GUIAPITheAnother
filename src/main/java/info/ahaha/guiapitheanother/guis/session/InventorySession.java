@@ -23,4 +23,9 @@ public class InventorySession extends Session {
     public VirtualInventory getVirtualInventory() {
         return virtualInventory;
     }
+
+    @Override
+    public void close() {
+        inventoryView.close();
+    }
 }
