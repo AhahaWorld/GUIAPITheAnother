@@ -1,9 +1,10 @@
 package info.ahaha.guiapitheanother;
 
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public interface GUI {
     String getTitle();
@@ -18,7 +19,7 @@ public interface GUI {
         getManager().call(event);
     }
 
-    default void init(){
+    default void init() {
         GUIAPITheAnother.guiList.add(this);
     }
 
