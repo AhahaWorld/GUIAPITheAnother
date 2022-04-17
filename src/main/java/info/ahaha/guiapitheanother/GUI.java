@@ -3,8 +3,7 @@ package info.ahaha.guiapitheanother;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public interface GUI {
     String getTitle();
@@ -24,26 +23,20 @@ public interface GUI {
     }
 
     class SessionContainer {
-        List<Session> sessions = new ArrayList<>();
+        Map<UUID, Session> sessions = new HashMap<>();
 
         public void add(Session session) {
-            sessions.add(session);
+            sessions.put(session.getPlayer().getUniqueId(), session);
         }
 
         public Session get(Player player) {
-            for (Session session : sessions)
-                if (session.getPlayer().getUniqueId().equals(player.getUniqueId()))
-                    return session;
-            return null;
+            return sessions.get(player.getUniqueId());
         }
 
         public Session delete(Player player) {
-            for (Session session : sessions)
-                if (session.getPlayer().getUniqueId().equals(player.getUniqueId())) {
-                    sessions.remove(session);
-                    return session;
-                }
-            return null;
+            Session session = sessions.get(player.getUniqueId());
+            sessions.remove(player.getUniqueId());
+            return session;
         }
     }
 }
