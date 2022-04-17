@@ -1,8 +1,9 @@
 package info.ahaha.guiapitheanother.util;
 
 import info.ahaha.guiapitheanother.GUI;
-import info.ahaha.guiapitheanother.guis.ButtonGUI;
+import info.ahaha.guiapitheanother.Button;
 import info.ahaha.guiapitheanother.guis.event.ButtonPushEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.geysermc.cumulus.Form;
 import org.geysermc.cumulus.SimpleForm;
@@ -12,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonFormBuilder {
-    private List<ButtonGUI.Button> buttons;
+    private List<Button> buttons;
     private String title;
 
-    public ButtonFormBuilder(List<ButtonGUI.Button> buttons, String title) {
+    public ButtonFormBuilder(List<Button> buttons, String title) {
         this.buttons = buttons;
         this.title = title;
     }
 
-    public List<ButtonGUI.Button> getButtons() {
+    public List<Button> getButtons() {
         return buttons;
     }
 
@@ -32,19 +33,19 @@ public class ButtonFormBuilder {
         this.title = title;
     }
 
-    public void setButtons(List<ButtonGUI.Button> buttons) {
+    public void setButtons(List<Button> buttons) {
         this.buttons = buttons;
     }
 
-    public Result build(GUI gui,Player player) {
+    public Result build(GUI gui, Player player) {
         SimpleForm.Builder builder = SimpleForm.builder();
         builder.title(getTitle());
-        final List<ButtonGUI.Button> buttons = new ArrayList<>(getButtons());
-        for (ButtonGUI.Button button : buttons) {
+        final List<Button> buttons = new ArrayList<>(getButtons());
+        for (Button button : buttons) {
             builder.button(button.getTitle());
         }
 
-        return new Result(builder,player,gui);
+        return new Result(builder, player, gui);
     }
 
     public class Result {
@@ -55,7 +56,7 @@ public class ButtonFormBuilder {
             builder.responseHandler((f, s) -> {
                 SimpleFormResponse response = f.parseResponse(s);
                 if (response.isCorrect()) {
-                    ButtonGUI.Button button = buttons.get(response.getClickedButtonId());
+                    Button button = buttons.get(response.getClickedButtonId());
                     gui.call(new ButtonPushEvent(gui, gui.getSessions().get(player), button));
                 }
             });

@@ -3,19 +3,19 @@ package info.ahaha.guiapitheanother.guis.event;
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIEvent;
 import info.ahaha.guiapitheanother.Session;
-import info.ahaha.guiapitheanother.guis.ButtonGUI;
+import info.ahaha.guiapitheanother.Button;
 
 public class ButtonPushEvent extends GUIEvent {
 
-    private final ButtonGUI.Button button;
+    private final Button button;
 
-    public ButtonPushEvent(GUI gui, Session session, ButtonGUI.Button button) {
+    public ButtonPushEvent(GUI gui, Session session, Button button) {
         super(gui, session);
         this.button = button;
 
     }
 
-    public ButtonGUI.Button getButton() {
+    public Button getButton() {
         return button;
     }
 }

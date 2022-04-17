@@ -10,18 +10,22 @@ import info.ahaha.guiapitheanother.guis.event.attribute.TargetPointUsable;
 import info.ahaha.guiapitheanother.guis.event.convert.ClickPointConvertable;
 import info.ahaha.guiapitheanother.guis.session.InventorySession;
 import info.ahaha.guiapitheanother.impl.VirtualInventoryImpl;
+import org.bukkit.event.Cancellable;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GUIClickEvent extends InventoryEvent implements ClickPointConvertable, TargetPointUsable, SubcontractSelector, TargetItemNameUsable {
+public class GUIClickEvent extends InventoryEvent implements ClickPointConvertable, TargetPointUsable, SubcontractSelector, TargetItemNameUsable, Cancellable {
+
+
     public GUIClickEvent(GUI gui, InventorySession session, Point clickPos) {
         super(gui, session);
         this.clickPos = clickPos;
     }
 
+    private boolean cancelled = false;
     protected final Point clickPos;
 
     @Override
@@ -45,5 +49,15 @@ public class GUIClickEvent extends InventoryEvent implements ClickPointConvertab
         if (!(inventory instanceof VirtualInventoryImpl))
             return new ArrayList<>();
         return new ArrayList<>(Arrays.asList(inventory.dominion(getTargetPoint())));
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.cancelled = cancel;
     }
 }

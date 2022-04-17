@@ -36,6 +36,7 @@ public interface LayoutGUI extends GUI {
         if(areas == null)
             return;
         for(GUIEventCallable area : areas){
+            if (area == null)continue;
             area.call(event);
         }
     }
@@ -55,6 +56,7 @@ public interface LayoutGUI extends GUI {
         InventorySession session = new InventorySession(this, player, view, vInventory);
         holder.setSession(session);
         vInventory.setSession(session);
+        getSessions().add(session);
         return session;
     }
 }

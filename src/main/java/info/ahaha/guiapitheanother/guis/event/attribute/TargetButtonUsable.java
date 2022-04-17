@@ -2,10 +2,10 @@ package info.ahaha.guiapitheanother.guis.event.attribute;
 
 import info.ahaha.guiapitheanother.GUIEventManager;
 import info.ahaha.guiapitheanother.annotation.TargetButton;
-import info.ahaha.guiapitheanother.guis.ButtonGUI;
+import info.ahaha.guiapitheanother.Button;
 
 public interface TargetButtonUsable {
-    ButtonGUI.Button getTargetButton();
+    Button getTargetButton();
 
     default boolean checkButton(GUIEventManager.ListenMethod method) {
         TargetButton button = method.method.getAnnotation(TargetButton.class);

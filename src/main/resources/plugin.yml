@@ -3,3 +3,6 @@ version: '${project.version}'
 main: info.ahaha.guiapitheanother.GUIAPITheAnother
 softdepend:
   - Floodgate
+
+commands:
+  guiapi:
