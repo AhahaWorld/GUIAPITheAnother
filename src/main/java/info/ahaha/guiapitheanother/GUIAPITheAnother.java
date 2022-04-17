@@ -26,6 +26,7 @@ public final class GUIAPITheAnother extends JavaPlugin {
         buttonGUI.getManager().register(new TestButtonListener());
         getServer().getPluginManager().registerEvents(new InventoryListener(),this);
         getCommand("guiapi").setExecutor(new Cmd());
+        getCommand("guiapi").setTabCompleter(new Cmd());
     }
 
     public boolean isFloodGateEnable() {
