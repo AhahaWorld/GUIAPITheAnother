@@ -1,13 +1,11 @@
 package info.ahaha.guiapitheanother.util;
 
-import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.Button;
+import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.guis.event.ButtonPushEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.geysermc.cumulus.Form;
-import org.geysermc.cumulus.SimpleForm;
-import org.geysermc.cumulus.response.SimpleFormResponse;
+import org.geysermc.cumulus.form.Form;
+import org.geysermc.cumulus.form.SimpleForm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,12 +51,9 @@ public class ButtonFormBuilder {
         private final SimpleForm.Builder builder;
 
         private void attachResponse(GUI gui, Player player) {
-            builder.responseHandler((f, s) -> {
-                SimpleFormResponse response = f.parseResponse(s);
-                if (response.isCorrect()) {
-                    Button button = buttons.get(response.getClickedButtonId());
-                    gui.call(new ButtonPushEvent(gui, gui.getSessions().get(player), button));
-                }
+            builder.validResultHandler(response -> {
+                Button button = buttons.get(response.clickedButtonId());
+                gui.call(new ButtonPushEvent(gui, gui.getSessions().get(player), button));
             });
         }
 

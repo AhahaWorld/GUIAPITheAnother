@@ -7,6 +7,7 @@ import info.ahaha.guiapitheanother.guis.session.FormSession;
 import info.ahaha.guiapitheanother.layout.ButtonsLayout;
 import info.ahaha.guiapitheanother.util.ButtonFormBuilder;
 import org.bukkit.entity.Player;
+import org.geysermc.cumulus.form.CustomForm;
 import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
 
     public SimpleButtonGUI(String title, Layout layout, Button... buttonList) {
         this.buttons = new ArrayList<>();
-        for(Button button : buttonList)
+        for(Button button : buttons)
             buttons.add(button);
         this.title = title;
         this.layout = layout;
@@ -91,7 +92,6 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
 
     @Override
     public Session showForBE(Player player, FloodgatePlayer floodgatePlayer) {
-
         ButtonFormBuilder builder = new ButtonFormBuilder(getButtons(), getTitle());
         FormSession session = new FormSession(this, player);
         floodgatePlayer.sendForm(builder.build(this, player).getForm());
