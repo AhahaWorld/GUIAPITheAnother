@@ -10,18 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VirtualInventoryImpl implements VirtualInventory {
+    private final VirtualInventoryImpl origin;
+    private final Size size;
+    private final List<LayoutArea> areas = new ArrayList<>();
+    private ItemStack[][] inventory;
+    private Session session;
     public VirtualInventoryImpl(Size size) {
         this.size = size;
         inventory = new ItemStack[size.x][size.y];
 
         origin = this;
     }
-
-    private final VirtualInventoryImpl origin;
-    private ItemStack[][] inventory;
-    private final Size size;
-    private final List<LayoutArea> areas = new ArrayList<>();
-    private Session session;
 
     public void setSession(Session session) {
         this.session = session;
@@ -258,21 +257,19 @@ public class VirtualInventoryImpl implements VirtualInventory {
     }
 
     public class CutVirtualInventory implements VirtualInventory {
+        private final Point leftTop, rightBottom;
+        private final Size size;
+        private final List<LayoutArea> areas = new ArrayList<>();
         public CutVirtualInventory(Point p1, Point p2) {
             leftTop = new Point(Math.min(p1.x, p2.x), Math.min(p1.y, p2.y));
             rightBottom = new Point(Math.max(p1.x, p2.x), Math.max(p1.y, p2.y));
             size = new Size(rightBottom.x - leftTop.x, rightBottom.y - leftTop.y);
         }
-
         public CutVirtualInventory(Point point, Size size) {
             leftTop = point.clone();
             rightBottom = new Point(point.x + size.x, point.y + size.y);
             this.size = size.clone();
         }
-
-        private final Point leftTop, rightBottom;
-        private final Size size;
-        private final List<LayoutArea> areas = new ArrayList<>();
 
         @Override
         public List<LayoutArea> getAreas() {
@@ -502,18 +499,17 @@ public class VirtualInventoryImpl implements VirtualInventory {
     }
 
     class LayoutAreaImpl implements LayoutArea {
+        private final String name;
+        private final Layout layout;
+        private final CutVirtualInventory inventory;
+        private final GUIEventManager areaEventManager = new GUIEventManager();
+        private boolean hidden;
         public LayoutAreaImpl(String name, Layout layout, CutVirtualInventory inventory, boolean hidden) {
             this.name = name;
             this.layout = layout;
             this.inventory = inventory;
             this.hidden = hidden;
         }
-
-        private final String name;
-        private boolean hidden;
-        private final Layout layout;
-        private final CutVirtualInventory inventory;
-        private final GUIEventManager areaEventManager = new GUIEventManager();
 
         @Override
         public String getName() {
@@ -523,6 +519,10 @@ public class VirtualInventoryImpl implements VirtualInventory {
         @Override
         public boolean isHidden() {
             return hidden;
+        }
+
+        public void setHidden(boolean hidden) {
+            this.hidden = hidden;
         }
 
         @Override
@@ -541,26 +541,22 @@ public class VirtualInventoryImpl implements VirtualInventory {
         }
 
         @Override
-        public GUIEvent convert(GUIEvent guiEvent){
-            if(guiEvent instanceof ClickPointConvertable)
+        public GUIEvent convert(GUIEvent guiEvent) {
+            if (guiEvent instanceof ClickPointConvertable)
                 guiEvent = (GUIEvent) ((ClickPointConvertable) guiEvent).convertClickPoint(inventory.leftTop);
-            if(guiEvent instanceof NestTimingConvertable)
+            if (guiEvent instanceof NestTimingConvertable)
                 guiEvent = (GUIEvent) ((NestTimingConvertable) guiEvent).convertNestTiming();
             return guiEvent;
         }
 
         @Override
-        public void call(GUIEvent event){
+        public void call(GUIEvent event) {
             areaEventManager.call(convert(event));
         }
 
         @Override
         public GUI getGUI() {
             return session.getGUI();
-        }
-
-        public void setHidden(boolean hidden) {
-            this.hidden = hidden;
         }
     }
 }

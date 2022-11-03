@@ -1,12 +1,9 @@
 package info.ahaha.guiapitheanother.listener;
 
-import info.ahaha.guiapitheanother.Button;
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIAPITheAnother;
 import info.ahaha.guiapitheanother.Session;
-import info.ahaha.guiapitheanother.guis.event.ButtonPushEvent;
 import info.ahaha.guiapitheanother.guis.event.GUIClickEvent;
-import info.ahaha.guiapitheanother.guis.impl.SimpleButtonGUI;
 import info.ahaha.guiapitheanother.guis.session.InventorySession;
 import info.ahaha.guiapitheanother.util.InventoryUtils;
 import org.bukkit.Bukkit;
@@ -34,7 +31,7 @@ public class InventoryListener implements Listener {
             InventorySession inventorySession = (InventorySession) session;
             GUIClickEvent clickEvent = new GUIClickEvent(session.getGUI(), inventorySession, InventoryUtils.convertSlotToPoint(e.getView().getType(), e.getSlot()));
             session.getGUI().call(clickEvent);
-            if (clickEvent.isCancelled()){
+            if (clickEvent.isCancelled()) {
                 e.setCancelled(true);
             }
         }

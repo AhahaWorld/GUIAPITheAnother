@@ -20,13 +20,12 @@ import java.util.List;
 public class GUIClickEvent extends InventoryEvent implements ClickPointConvertable, TargetPointUsable, SubcontractSelector, TargetItemNameUsable, Cancellable {
 
 
+    protected final Point clickPos;
+    private boolean cancelled = false;
     public GUIClickEvent(GUI gui, InventorySession session, Point clickPos) {
         super(gui, session);
         this.clickPos = clickPos;
     }
-
-    private boolean cancelled = false;
-    protected final Point clickPos;
 
     @Override
     public ClickPointConvertable convertClickPoint(Point new_origin) {

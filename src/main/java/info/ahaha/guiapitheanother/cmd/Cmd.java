@@ -2,14 +2,12 @@ package info.ahaha.guiapitheanother.cmd;
 
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIAPITheAnother;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.geysermc.floodgate.api.FloodgateApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +40,13 @@ public class Cmd implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length >= 1)
-        if (args[0].equals("open")){
-            List<String>titles = new ArrayList<>();
-            GUIAPITheAnother.guiList.forEach((gui -> {
-                titles.add(gui.getTitle());
-            }));
-            return titles;
-        }
+            if (args[0].equals("open")) {
+                List<String> titles = new ArrayList<>();
+                GUIAPITheAnother.guiList.forEach((gui -> {
+                    titles.add(gui.getTitle());
+                }));
+                return titles;
+            }
         return null;
     }
 }

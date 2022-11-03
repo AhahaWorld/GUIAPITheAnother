@@ -2,7 +2,9 @@ package info.ahaha.guiapitheanother.exception;
 
 import info.ahaha.guiapitheanother.VirtualInventory;
 
-public class VirtualInventoryException extends Exception{
+public class VirtualInventoryException extends Exception {
+    protected VirtualInventory virtualInventory;
+
     public VirtualInventoryException(VirtualInventory virtualInventory) {
         this.virtualInventory = virtualInventory;
     }
@@ -21,8 +23,6 @@ public class VirtualInventoryException extends Exception{
         super(cause);
         this.virtualInventory = virtualInventory;
     }
-
-    protected VirtualInventory virtualInventory;
 
     public VirtualInventory getVirtualInventory() {
         return virtualInventory;

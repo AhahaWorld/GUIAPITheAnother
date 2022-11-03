@@ -7,8 +7,8 @@ import info.ahaha.guiapitheanother.guis.event.ButtonPushEvent;
 public class TestButtonListener implements GUIListener {
 
     @GUIEventHandler
-    public void onTest(ButtonPushEvent e){
-        if (e.getButton().getTitle().equals("test")){
+    public void onTest(ButtonPushEvent e) {
+        if (e.getButton().getTitle().equals("test")) {
             e.getSession().getPlayer().sendMessage("TestOk!");
         }
     }

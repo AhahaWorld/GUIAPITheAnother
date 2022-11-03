@@ -7,15 +7,14 @@ import java.util.Map;
 import java.util.Optional;
 
 public class Session {
-    public Session(GUI gui, Player player) {
-        this.gui = gui;
-        this.player = player;
-    }
-
     private final GUI gui;
     private final Player player;
     private final Map<String, Object> properties = new HashMap<>();
     private Session previous = null, next = null;
+    public Session(GUI gui, Player player) {
+        this.gui = gui;
+        this.player = player;
+    }
 
     public GUI getGUI() {
         return gui;

@@ -16,7 +16,7 @@ public interface GUI extends GUIEventCallable {
     Session show(Player player);
 
     @Override
-    default GUI getGUI(){
+    default GUI getGUI() {
         return this;
     }
 

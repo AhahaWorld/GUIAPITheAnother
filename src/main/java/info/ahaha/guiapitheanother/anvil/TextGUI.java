@@ -1,6 +1,5 @@
 package info.ahaha.guiapitheanother.anvil;
 
-import info.ahaha.guiapitheanother.GUIEvent;
 import info.ahaha.guiapitheanother.GUIEventManager;
 import info.ahaha.guiapitheanother.Session;
 import info.ahaha.guiapitheanother.bedrock.SupportedBedrockGUI;
@@ -58,16 +57,16 @@ public class TextGUI implements SupportedBedrockGUI {
         CustomForm.Builder builder = new CustomFormImpl.Builder();
         builder.title(getTitle());
         builder.input(getInput());
-        builder.responseHandler((f,s)->{
+        builder.responseHandler((f, s) -> {
             CustomFormResponse response = f.parseResponse(s);
-            if (response.isCorrect()){
-                if (response.getInput(0) != null){
+            if (response.isCorrect()) {
+                if (response.getInput(0) != null) {
                     this.call(new GUITextEvent(this, getSessions().get(player), response.getInput(0)));
                 }
             }
         });
         floodgatePlayer.sendForm(builder.build());
-        FormSession session = new FormSession(this,player);
+        FormSession session = new FormSession(this, player);
         container.add(session);
         return session;
     }

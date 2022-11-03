@@ -7,9 +7,9 @@ import info.ahaha.guiapitheanother.annotation.TargetPoint;
 public interface TargetPointUsable {
     Point getTargetPoint();
 
-    default boolean checkPoint(GUIEventManager.ListenMethod method){
+    default boolean checkPoint(GUIEventManager.ListenMethod method) {
         TargetPoint point = method.method.getAnnotation(TargetPoint.class);
-        if(point == null)
+        if (point == null)
             return true;
         return getTargetPoint().equals(new Point(point.x(), point.y()));
     }

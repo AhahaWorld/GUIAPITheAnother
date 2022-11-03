@@ -50,7 +50,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemStack build(){
+    public ItemStack build() {
         this.item.setItemMeta(this.meta);
         return this.item.clone();
     }

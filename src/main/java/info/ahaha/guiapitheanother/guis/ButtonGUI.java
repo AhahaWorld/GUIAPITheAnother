@@ -1,7 +1,6 @@
 package info.ahaha.guiapitheanother.guis;
 
 import info.ahaha.guiapitheanother.Button;
-import info.ahaha.guiapitheanother.GUI;
 
 import java.util.List;
 

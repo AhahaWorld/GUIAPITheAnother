@@ -1,11 +1,8 @@
 package info.ahaha.guiapitheanother.impl;
 
+import info.ahaha.guiapitheanother.*;
 import org.bukkit.entity.Player;
 import org.junit.jupiter.api.Test;
-import info.ahaha.guiapitheanother.*;
-
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class VirtualInventoryImplTest {
     static class LayoutImpl implements Layout{

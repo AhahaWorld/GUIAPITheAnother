@@ -24,20 +24,20 @@ public class Button {
         return title;
     }
 
-    public ItemStack getIcon() {
-        return icon;
-    }
-
-    public String getIconUrl() {
-        return iconUrl;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public ItemStack getIcon() {
+        return icon;
+    }
+
     public void setIcon(ItemStack icon) {
         this.icon = icon;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
     }
 
     public void setIconUrl(String iconUrl) {

@@ -25,7 +25,7 @@ public final class GUIAPITheAnother extends JavaPlugin {
         //TODO iconURLの有効化がまだなのでいつか直す
         ButtonGUI buttonGUI = new SimpleButtonGUI("test", new ArrayList<>(Arrays.asList(new Button("test", new ItemStack(Material.STRING), "https://cdn.discordapp.com/attachments/957673645159907338/957936255834914846/homemenu.png"))));
         buttonGUI.getManager().register(new TestButtonListener());
-        getServer().getPluginManager().registerEvents(new InventoryListener(),this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         getCommand("guiapi").setExecutor(new Cmd());
         getCommand("guiapi").setTabCompleter(new Cmd());
     }

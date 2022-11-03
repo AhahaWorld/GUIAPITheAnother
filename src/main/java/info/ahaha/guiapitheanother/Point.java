@@ -1,19 +1,19 @@
 package info.ahaha.guiapitheanother;
 
-public class Point implements Cloneable{
+public class Point implements Cloneable {
     public int x, y;
-
-    public Point add(Point point){
-        return new Point(x + point.x, y + point.y);
-    }
-
-    public Point sub(Point point){
-        return new Point(x - point.x, y - point.y);
-    }
 
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Point add(Point point) {
+        return new Point(x + point.x, y + point.y);
+    }
+
+    public Point sub(Point point) {
+        return new Point(x - point.x, y - point.y);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Point implements Cloneable{
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Size)
-            if(((Size) obj).x == x && ((Size) obj).y == y)
+            if (((Size) obj).x == x && ((Size) obj).y == y)
                 return true;
         return super.equals(obj);
     }

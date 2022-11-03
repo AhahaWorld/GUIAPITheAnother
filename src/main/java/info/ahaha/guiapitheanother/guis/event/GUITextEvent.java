@@ -8,7 +8,7 @@ public class GUITextEvent extends GUIEvent {
 
     private String text;
 
-    public GUITextEvent(GUI gui, Session session,String text) {
+    public GUITextEvent(GUI gui, Session session, String text) {
         super(gui, session);
         this.text = text;
     }

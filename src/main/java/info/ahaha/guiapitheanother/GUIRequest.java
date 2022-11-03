@@ -50,13 +50,12 @@ public interface GUIRequest<T> {
         }
 
         public static class ResponseData<T> {
+            GUIListener listener;
+            T t;
             public ResponseData(GUIListener listener, T t) {
                 this.listener = listener;
                 this.t = t;
             }
-
-            GUIListener listener;
-            T t;
         }
     }
 }

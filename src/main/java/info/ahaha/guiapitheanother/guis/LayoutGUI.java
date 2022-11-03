@@ -3,7 +3,6 @@ package info.ahaha.guiapitheanother.guis;
 import info.ahaha.guiapitheanother.*;
 import info.ahaha.guiapitheanother.guis.event.attribute.SubcontractAccessor;
 import info.ahaha.guiapitheanother.guis.event.attribute.SubcontractSelector;
-import info.ahaha.guiapitheanother.guis.event.attribute.TargetPointUsable;
 import info.ahaha.guiapitheanother.guis.session.InventorySession;
 import info.ahaha.guiapitheanother.impl.VirtualInventoryImpl;
 import info.ahaha.guiapitheanother.util.InventoryUtils;
@@ -29,14 +28,14 @@ public interface LayoutGUI extends GUI {
     default void call(GUIEvent event) {
         GUI.super.call(event);
         List<? extends GUIEventCallable> areas = null;
-        if(event instanceof SubcontractSelector)
+        if (event instanceof SubcontractSelector)
             areas = ((SubcontractSelector) event).selectSubcontract();
-        else if(event instanceof SubcontractAccessor)
+        else if (event instanceof SubcontractAccessor)
             areas = ((SubcontractAccessor) event).getSubcontract();
-        if(areas == null)
+        if (areas == null)
             return;
-        for(GUIEventCallable area : areas){
-            if (area == null)continue;
+        for (GUIEventCallable area : areas) {
+            if (area == null) continue;
             area.call(event);
         }
     }

@@ -6,7 +6,7 @@ import info.ahaha.guiapitheanother.guis.event.ButtonPushEvent;
 
 public class SayYoButtonPushListener implements GUIListener {
     @GUIEventHandler
-    public void onPush(ButtonPushEvent e){
+    public void onPush(ButtonPushEvent e) {
         System.out.println("yo!");
     }
 }

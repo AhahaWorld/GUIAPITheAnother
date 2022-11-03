@@ -23,11 +23,11 @@ public class GUIEventManager implements GUIEventCallable {
             if (method.getParameterCount() != 1)
                 continue;
             Type type = method.getParameterTypes()[0].getGenericSuperclass();
-            while (!type.equals(GUIEvent.class)){
+            while (!type.equals(GUIEvent.class)) {
                 if (!(type instanceof Class))
                     break;
                 type = ((Class<?>) type).getGenericSuperclass();
-                if(type.equals(Object.class))
+                if (type.equals(Object.class))
                     break;
             }
             if (!type.equals(GUIEvent.class))
@@ -82,12 +82,11 @@ public class GUIEventManager implements GUIEventCallable {
     }
 
     public static class ListenMethod {
+        public Method method;
+        public Class<?> argEventClass;
         public ListenMethod(Method method, Class<?> argEventClass) {
             this.method = method;
             this.argEventClass = argEventClass;
         }
-
-        public Method method;
-        public Class<?> argEventClass;
     }
 }

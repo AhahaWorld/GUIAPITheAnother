@@ -4,9 +4,7 @@ import info.ahaha.guiapitheanother.*;
 import info.ahaha.guiapitheanother.bedrock.SupportedBedrockGUI;
 import info.ahaha.guiapitheanother.bedrock.SupportedBedrockLayout;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
-import info.ahaha.guiapitheanother.guis.session.FormSession;
 import info.ahaha.guiapitheanother.layout.ButtonsLayout;
-import info.ahaha.guiapitheanother.bedrock.impl.SimpleButtonFormConvertor;
 import org.bukkit.entity.Player;
 import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
@@ -17,9 +15,9 @@ import java.util.List;
 public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
     private final GUIEventManager manager = new GUIEventManager();
     private final SessionContainer container = new SessionContainer();
+    private final SupportedBedrockLayout layout;
     private List<Button> buttons;
     private String title;
-    private final SupportedBedrockLayout layout;
 
     public SimpleButtonGUI(String title, Button... buttonList) {
         this.buttons = new ArrayList<>();
@@ -38,7 +36,7 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
 
     public SimpleButtonGUI(String title, SupportedBedrockLayout layout, Button... buttonList) {
         this.buttons = new ArrayList<>();
-        for(Button button : buttons)
+        for (Button button : buttons)
             buttons.add(button);
         this.title = title;
         this.layout = layout;

@@ -1,7 +1,6 @@
 package info.ahaha.guiapitheanother.bedrock.impl;
 
 import info.ahaha.guiapitheanother.Button;
-import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIEventCallable;
 import info.ahaha.guiapitheanother.Session;
 import info.ahaha.guiapitheanother.bedrock.FormConvertor;
@@ -27,16 +26,16 @@ public class SimpleButtonFormConvertor implements FormConvertor {
         return buttons;
     }
 
+    public void setButtons(List<Button> buttons) {
+        this.buttons = buttons;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setButtons(List<Button> buttons) {
-        this.buttons = buttons;
     }
 
     @Override
@@ -50,7 +49,7 @@ public class SimpleButtonFormConvertor implements FormConvertor {
         return new Result(builder);
     }
 
-    public class Result implements FormConvertorResult{
+    public class Result implements FormConvertorResult {
         private final SimpleForm.Builder builder;
         private GUIEventCallable callable;
 

@@ -4,8 +4,6 @@ import info.ahaha.guiapitheanother.Layout;
 import info.ahaha.guiapitheanother.Session;
 import info.ahaha.guiapitheanother.Size;
 import info.ahaha.guiapitheanother.VirtualInventory;
-import info.ahaha.guiapitheanother.util.ItemBuilder;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class PreviousLayout implements Layout {
