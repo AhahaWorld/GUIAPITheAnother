@@ -53,7 +53,7 @@ public class ButtonsLayout implements SupportedBedrockLayout {
     }
 
     @Override
-    public FormConvertor.FormConvertorResult makeForBE() {
+    public FormConvertor.FormConvertorResult makeForBE(Player player) {
         return new SimpleButtonFormConvertor(name(), buttons).convert();
     }
 }

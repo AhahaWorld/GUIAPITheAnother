@@ -15,8 +15,13 @@ public class ItemBuilder {
     private ItemStack item;
     private ItemMeta meta;
 
+    public ItemBuilder(Material material, int damage) {
+        this.item = new ItemStack(material, 1, (short) damage);
+        this.meta = this.item.getItemMeta();
+    }
+
     public ItemBuilder(Material material) {
-        this.item = new ItemStack(material);
+        this.item = new ItemStack(material, 1);
         this.meta = this.item.getItemMeta();
     }
 
@@ -54,6 +59,4 @@ public class ItemBuilder {
         this.item.setItemMeta(this.meta);
         return this.item.clone();
     }
-
-
 }

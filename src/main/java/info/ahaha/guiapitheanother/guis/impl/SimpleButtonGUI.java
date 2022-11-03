@@ -90,7 +90,7 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
 
     @Override
     public Session showForBE(Player player, FloodgatePlayer floodgatePlayer) {
-        return layout.makeForBE().attachCallable(this).showForBE(player, floodgatePlayer);
+        return layout.makeForBE(player).attachCallable(this).showForBE(player, floodgatePlayer);
     }
 
     @Override

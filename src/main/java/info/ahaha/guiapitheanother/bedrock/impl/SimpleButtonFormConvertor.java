@@ -11,6 +11,7 @@ import org.geysermc.cumulus.form.SimpleForm;
 import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SimpleButtonFormConvertor implements FormConvertor {
@@ -20,6 +21,11 @@ public class SimpleButtonFormConvertor implements FormConvertor {
     public SimpleButtonFormConvertor(String title, List<Button> buttons) {
         this.title = title;
         this.buttons = buttons;
+    }
+
+    public SimpleButtonFormConvertor(String title, Button... buttons) {
+        this.title = title;
+        this.buttons = new ArrayList<>(Arrays.asList(buttons));
     }
 
     public List<Button> getButtons() {
