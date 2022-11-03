@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>info.ahaha</groupId>
-    <artifactId>GUIAPITheAnother</artifactId>
+    <artifactId>guiapi-the-another</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>GUIAPITheAnother</name>
+    <name>guiapi-the-another</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -51,6 +51,14 @@
             </resource>
         </resources>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub AhahaWorld Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/AhahaWorld/GUIAPITheAnother </url>
+        </repository>
+    </distributionManagement>
 
     <repositories>
         <repository>
