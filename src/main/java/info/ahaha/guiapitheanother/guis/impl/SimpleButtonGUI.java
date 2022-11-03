@@ -10,19 +10,44 @@ import org.bukkit.entity.Player;
 import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
     private final GUIEventManager manager = new GUIEventManager();
     private final SessionContainer container = new SessionContainer();
     private List<Button> buttons;
-    private String title = "";
-    private Layout layout;
+    private String title;
+    private final Layout layout;
+
+    public SimpleButtonGUI(String title, Button... buttonList) {
+        this.buttons = new ArrayList<>();
+        Collections.addAll(buttons, buttonList);
+        this.title = title;
+        this.layout = new ButtonsLayout(new Size(9, 4), buttons);
+        init();
+    }
 
     public SimpleButtonGUI(String title, List<Button> buttons) {
         this.buttons = buttons;
         this.title = title;
         this.layout = new ButtonsLayout(new Size(9, 4), buttons);
+        init();
+    }
+
+    public SimpleButtonGUI(String title, Layout layout, Button... buttonList) {
+        this.buttons = new ArrayList<>();
+        for(Button button : buttonList)
+            buttons.add(button);
+        this.title = title;
+        this.layout = layout;
+        init();
+    }
+
+    public SimpleButtonGUI(String title, Layout layout, List<Button> buttons) {
+        this.buttons = buttons;
+        this.title = title;
+        this.layout = layout;
         init();
     }
 

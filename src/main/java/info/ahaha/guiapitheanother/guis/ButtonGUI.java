@@ -2,7 +2,6 @@ package info.ahaha.guiapitheanother.guis;
 
 import info.ahaha.guiapitheanother.Button;
 import info.ahaha.guiapitheanother.GUI;
-import info.ahaha.guiapitheanother.guis.listener.ButtonThrowListener;
 
 import java.util.List;
 
@@ -12,7 +11,6 @@ public interface ButtonGUI extends GUI, LayoutGUI {
     @Override
     default void init() {
         LayoutGUI.super.init();
-        getManager().register(new ButtonThrowListener());
     }
 
 

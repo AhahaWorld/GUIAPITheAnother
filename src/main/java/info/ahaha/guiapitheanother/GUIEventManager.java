@@ -52,23 +52,18 @@ public class GUIEventManager implements GUIEventCallable {
     public void call(GUIEvent e) {
         for (GUIListener listener : guiListenerMethodMap.keySet())
             for (ListenMethod m : guiListenerMethodMap.get(listener)) {
-                Bukkit.getLogger().info("1" + m.argEventClass.getName() + " " + e.getClass().getName());
                 Bukkit.getLogger().info(String.valueOf(guiListenerMethodMap.size()));
                 if (!m.argEventClass.equals(e.getClass()))
                     continue;
-                Bukkit.getLogger().info("2");
                 if (e instanceof TargetPointUsable)
                     if (!((TargetPointUsable) e).checkPoint(m))
                         continue;
-                Bukkit.getLogger().info("3");
                 if (e instanceof TargetButtonUsable)
                     if (!((TargetButtonUsable) e).checkButton(m))
                         continue;
-                Bukkit.getLogger().info("4");
                 if (e instanceof TargetItemNameUsable)
                     if (!((TargetItemNameUsable) e).checkItemName(m))
                         continue;
-                Bukkit.getLogger().info("5");
                 try {
                     m.method.invoke(listener, m.argEventClass.cast(e));
                 } catch (IllegalAccessException | InvocationTargetException ex) {

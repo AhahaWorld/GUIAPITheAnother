@@ -1,4 +1,4 @@
-package info.ahaha.guiapitheanother.guis.listener;
+package info.ahaha.guiapitheanother.layout.listener;
 
 import info.ahaha.guiapitheanother.Button;
 import info.ahaha.guiapitheanother.GUI;
@@ -13,14 +13,12 @@ public class ButtonThrowListener implements GUIListener {
 
     @GUIEventHandler
     public void onThrow(GUIClickEvent e) {
-        Bukkit.getLogger().info("throwEvent call");
         e.setCancelled(true);
         GUI gui = e.getGUI();
         if (!(gui instanceof ButtonGUI)) return;
         ButtonGUI buttonGUI = (ButtonGUI) gui;
         for (Button button : buttonGUI.getButtons()){
             if (button.getIcon().isSimilar(e.getTargetItem())){
-                Bukkit.getLogger().info("isSimilar");
                 e.getSession().getGUI().call(new ButtonPushEvent(buttonGUI, e.getSession(), button));
                 return;
             }

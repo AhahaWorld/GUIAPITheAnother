@@ -1,17 +1,18 @@
 package info.ahaha.guiapitheanother.layout;
 
-import info.ahaha.guiapitheanother.Layout;
-import info.ahaha.guiapitheanother.Size;
-import info.ahaha.guiapitheanother.VirtualInventory;
-import info.ahaha.guiapitheanother.Button;
+import info.ahaha.guiapitheanother.*;
+import info.ahaha.guiapitheanother.layout.listener.ButtonThrowListener;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ButtonsLayout implements Layout {
 
     private Size size;
     private List<Button> buttons;
+
 
     public ButtonsLayout(Size size, List<Button> buttons) {
         this.size = size;
@@ -33,5 +34,10 @@ public class ButtonsLayout implements Layout {
             inventory.set(i % size.x, i / size.x, buttons.get(i).getIcon());
         }
         return true;
+    }
+
+    @Override
+    public List<GUIListener> listeners() {
+        return new ArrayList<>(Arrays.asList(new ButtonThrowListener()));
     }
 }
