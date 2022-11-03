@@ -13,6 +13,11 @@ import java.util.List;
 
 public class CloseLayout implements Layout {
     @Override
+    public String name() {
+        return "Close";
+    }
+
+    @Override
     public Size size() {
         return new Size(0, 0);
     }

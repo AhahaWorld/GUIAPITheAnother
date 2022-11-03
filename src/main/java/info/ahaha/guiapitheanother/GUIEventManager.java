@@ -72,6 +72,11 @@ public class GUIEventManager implements GUIEventCallable {
             }
     }
 
+    @Override
+    public GUI getGUI() {
+        return null;
+    }
+
     public Map<GUIListener, List<ListenMethod>> getListenersMap() {
         return guiListenerMethodMap;
     }

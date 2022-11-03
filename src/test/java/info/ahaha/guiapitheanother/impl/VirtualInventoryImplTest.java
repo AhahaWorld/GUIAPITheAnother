@@ -16,6 +16,11 @@ class VirtualInventoryImplTest {
         Size size;
 
         @Override
+        public String name() {
+            return "Test";
+        }
+
+        @Override
         public Size size() {
             return size;
         }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public interface GUI {
+public interface GUI extends GUIEventCallable {
     String getTitle();
 
     GUIEventManager getManager();
@@ -14,6 +14,11 @@ public interface GUI {
     SessionContainer getSessions();
 
     Session show(Player player);
+
+    @Override
+    default GUI getGUI(){
+        return this;
+    }
 
     default void call(GUIEvent event) {
         getManager().call(event);

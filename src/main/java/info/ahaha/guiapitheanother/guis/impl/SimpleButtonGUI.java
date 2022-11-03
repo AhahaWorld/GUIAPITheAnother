@@ -2,12 +2,12 @@ package info.ahaha.guiapitheanother.guis.impl;
 
 import info.ahaha.guiapitheanother.*;
 import info.ahaha.guiapitheanother.bedrock.SupportedBedrockGUI;
+import info.ahaha.guiapitheanother.bedrock.SupportedBedrockLayout;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;
 import info.ahaha.guiapitheanother.guis.session.FormSession;
 import info.ahaha.guiapitheanother.layout.ButtonsLayout;
-import info.ahaha.guiapitheanother.util.ButtonFormBuilder;
+import info.ahaha.guiapitheanother.bedrock.impl.SimpleButtonFormConvertor;
 import org.bukkit.entity.Player;
-import org.geysermc.cumulus.form.CustomForm;
 import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
     private final SessionContainer container = new SessionContainer();
     private List<Button> buttons;
     private String title;
-    private final Layout layout;
+    private final SupportedBedrockLayout layout;
 
     public SimpleButtonGUI(String title, Button... buttonList) {
         this.buttons = new ArrayList<>();
@@ -36,7 +36,7 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
         init();
     }
 
-    public SimpleButtonGUI(String title, Layout layout, Button... buttonList) {
+    public SimpleButtonGUI(String title, SupportedBedrockLayout layout, Button... buttonList) {
         this.buttons = new ArrayList<>();
         for(Button button : buttons)
             buttons.add(button);
@@ -45,7 +45,7 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
         init();
     }
 
-    public SimpleButtonGUI(String title, Layout layout, List<Button> buttons) {
+    public SimpleButtonGUI(String title, SupportedBedrockLayout layout, List<Button> buttons) {
         this.buttons = buttons;
         this.title = title;
         this.layout = layout;
@@ -92,11 +92,7 @@ public class SimpleButtonGUI implements ButtonGUI, SupportedBedrockGUI {
 
     @Override
     public Session showForBE(Player player, FloodgatePlayer floodgatePlayer) {
-        ButtonFormBuilder builder = new ButtonFormBuilder(getButtons(), getTitle());
-        FormSession session = new FormSession(this, player);
-        floodgatePlayer.sendForm(builder.build(this, player).getForm());
-        container.add(session);
-        return session;
+        return layout.makeForBE().attachCallable(this).showForBE(player, floodgatePlayer);
     }
 
     @Override

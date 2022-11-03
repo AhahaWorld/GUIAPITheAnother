@@ -1,14 +1,18 @@
 package info.ahaha.guiapitheanother.layout;
 
 import info.ahaha.guiapitheanother.*;
+import info.ahaha.guiapitheanother.bedrock.FormConvertor;
+import info.ahaha.guiapitheanother.bedrock.SupportedBedrockLayout;
+import info.ahaha.guiapitheanother.bedrock.impl.SimpleButtonFormConvertor;
 import info.ahaha.guiapitheanother.layout.listener.ButtonThrowListener;
 import org.bukkit.entity.Player;
+import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ButtonsLayout implements Layout {
+public class ButtonsLayout implements SupportedBedrockLayout {
 
     private Size size;
     private List<Button> buttons;
@@ -21,6 +25,11 @@ public class ButtonsLayout implements Layout {
 
     public List<Button> getButtons() {
         return buttons;
+    }
+
+    @Override
+    public String name() {
+        return "Button";
     }
 
     @Override
@@ -39,5 +48,10 @@ public class ButtonsLayout implements Layout {
     @Override
     public List<GUIListener> listeners() {
         return new ArrayList<>(Arrays.asList(new ButtonThrowListener()));
+    }
+
+    @Override
+    public FormConvertor.FormConvertorResult makeForBE() {
+        return new SimpleButtonFormConvertor(name(), buttons).convert();
     }
 }

@@ -10,6 +10,11 @@ import org.bukkit.entity.Player;
 
 public class PreviousLayout implements Layout {
     @Override
+    public String name() {
+        return "Previous";
+    }
+
+    @Override
     public Size size() {
         return new Size(1, 1);
     }

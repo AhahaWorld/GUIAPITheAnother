@@ -6,6 +6,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 public interface Layout {
+    String name();
+
     Size size();
 
     boolean make(VirtualInventory inventory, Player player);

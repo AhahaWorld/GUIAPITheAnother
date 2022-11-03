@@ -554,6 +554,11 @@ public class VirtualInventoryImpl implements VirtualInventory {
             areaEventManager.call(convert(event));
         }
 
+        @Override
+        public GUI getGUI() {
+            return session.getGUI();
+        }
+
         public void setHidden(boolean hidden) {
             this.hidden = hidden;
         }
