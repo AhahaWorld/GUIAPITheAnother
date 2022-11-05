@@ -2,12 +2,17 @@ package info.ahaha.guiapitheanother.cmd;
 
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIAPITheAnother;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.geysermc.cumulus.form.CustomForm;
+import org.geysermc.cumulus.form.impl.custom.CustomFormImpl;
+import org.geysermc.floodgate.api.FloodgateApi;
+import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +31,13 @@ public class Cmd implements CommandExecutor, TabCompleter {
                     break;
                 }
             }
+        }
+        if (args[0].equals("test")) {
+            CustomForm.Builder builder = new CustomFormImpl.Builder();
+            builder.toggle("test1");
+            builder.toggle("test2");
+            FloodgatePlayer floodgatePlayer = FloodgateApi.getInstance().getPlayer(player.getUniqueId());
+            floodgatePlayer.sendForm(builder.build());
         }
         if (args[0].equals("list")) {
             player.sendMessage(ChatColor.GRAY + "---------------------------------------------");

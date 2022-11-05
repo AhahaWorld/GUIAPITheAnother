@@ -1,5 +1,6 @@
 package info.ahaha.guiapitheanother;
 
+import info.ahaha.guiapitheanother.bedrock.Button;
 import info.ahaha.guiapitheanother.cmd.Cmd;
 import info.ahaha.guiapitheanother.example.TestButtonListener;
 import info.ahaha.guiapitheanother.guis.ButtonGUI;

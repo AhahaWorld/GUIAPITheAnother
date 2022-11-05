@@ -1,13 +1,14 @@
 package info.ahaha.guiapitheanother.anvil;
 
+import info.ahaha.guiapitheanother.GUIEvent;
 import info.ahaha.guiapitheanother.GUIEventManager;
 import info.ahaha.guiapitheanother.Session;
 import info.ahaha.guiapitheanother.bedrock.SupportedBedrockGUI;
 import info.ahaha.guiapitheanother.guis.event.GUITextEvent;
 import info.ahaha.guiapitheanother.guis.session.FormSession;
 import org.bukkit.entity.Player;
-import org.geysermc.cumulus.CustomForm;
-import org.geysermc.cumulus.impl.CustomFormImpl;
+import org.geysermc.cumulus.form.CustomForm;
+import org.geysermc.cumulus.form.impl.custom.CustomFormImpl;
 import org.geysermc.cumulus.response.CustomFormResponse;
 import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
@@ -57,12 +58,13 @@ public class TextGUI implements SupportedBedrockGUI {
         CustomForm.Builder builder = new CustomFormImpl.Builder();
         builder.title(getTitle());
         builder.input(getInput());
-        builder.responseHandler((f, s) -> {
-            CustomFormResponse response = f.parseResponse(s);
-            if (response.isCorrect()) {
-                if (response.getInput(0) != null) {
-                    this.call(new GUITextEvent(this, getSessions().get(player), response.getInput(0)));
-                }
+        builder.closedResultHandler((c)->{
+
+        });
+        builder.validResultHandler((f, r) -> {
+
+            if (r.asInput(0) != null) {
+                this.call(new GUITextEvent(this, getSessions().get(player), r.asInput(0)));
             }
         });
         floodgatePlayer.sendForm(builder.build());

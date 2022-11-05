@@ -1,8 +1,8 @@
 package info.ahaha.guiapitheanother.guis.event.attribute;
 
-import info.ahaha.guiapitheanother.Button;
 import info.ahaha.guiapitheanother.GUIEventManager;
 import info.ahaha.guiapitheanother.annotation.TargetButton;
+import info.ahaha.guiapitheanother.bedrock.Button;
 
 public interface TargetButtonUsable {
     Button getTargetButton();

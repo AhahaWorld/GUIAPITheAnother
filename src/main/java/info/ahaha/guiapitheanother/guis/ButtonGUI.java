@@ -1,6 +1,6 @@
 package info.ahaha.guiapitheanother.guis;
 
-import info.ahaha.guiapitheanother.Button;
+import info.ahaha.guiapitheanother.bedrock.Button;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package info.ahaha.guiapitheanother.bedrock.impl;
 
-import info.ahaha.guiapitheanother.Button;
 import info.ahaha.guiapitheanother.GUIEventCallable;
 import info.ahaha.guiapitheanother.Session;
+import info.ahaha.guiapitheanother.bedrock.Button;
 import info.ahaha.guiapitheanother.bedrock.FormConvertor;
 import info.ahaha.guiapitheanother.guis.event.ButtonPushEvent;
 import info.ahaha.guiapitheanother.guis.session.FormSession;

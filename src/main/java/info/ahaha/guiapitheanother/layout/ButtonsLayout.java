@@ -1,9 +1,9 @@
 package info.ahaha.guiapitheanother.layout;
 
-import info.ahaha.guiapitheanother.Button;
 import info.ahaha.guiapitheanother.GUIListener;
 import info.ahaha.guiapitheanother.Size;
 import info.ahaha.guiapitheanother.VirtualInventory;
+import info.ahaha.guiapitheanother.bedrock.Button;
 import info.ahaha.guiapitheanother.bedrock.FormConvertor;
 import info.ahaha.guiapitheanother.bedrock.SupportedBedrockLayout;
 import info.ahaha.guiapitheanother.bedrock.impl.SimpleButtonFormConvertor;

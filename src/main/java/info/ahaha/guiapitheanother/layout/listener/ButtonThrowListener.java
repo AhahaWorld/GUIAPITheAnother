@@ -1,6 +1,6 @@
 package info.ahaha.guiapitheanother.layout.listener;
 
-import info.ahaha.guiapitheanother.Button;
+import info.ahaha.guiapitheanother.bedrock.Button;
 import info.ahaha.guiapitheanother.GUI;
 import info.ahaha.guiapitheanother.GUIListener;
 import info.ahaha.guiapitheanother.annotation.GUIEventHandler;
